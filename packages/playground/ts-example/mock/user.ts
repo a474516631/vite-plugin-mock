@@ -1,5 +1,4 @@
 import type { MockConfig } from 'vite-plugin-mock'
-
 export default (config?: MockConfig) => {
   return [
     {
@@ -12,7 +11,7 @@ export default (config?: MockConfig) => {
         return {
           code: 0,
           message: 'ok',
-          data: { a: 21, 'import.meta.url': import.meta.url },
+          data: {},
         }
       },
     },

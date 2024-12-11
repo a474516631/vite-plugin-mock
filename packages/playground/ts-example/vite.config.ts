@@ -13,5 +13,8 @@ export default (): UserConfigExport => {
         logger: true,
       }),
     ],
+    server: {
+      port: 3333,
+    },
   }
 }

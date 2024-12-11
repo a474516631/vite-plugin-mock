@@ -1,4 +1,5 @@
 import fs from 'fs'
+import path from 'path'
 
 const toString = Object.prototype.toString
 
@@ -37,4 +38,18 @@ export function sleep(time: number) {
       resolve('')
     }, time)
   })
+}
+export function createFileWithDir(filePath: string, content = '') {
+  // 获取文件所在目录路径
+  const dirPath = path.dirname(filePath)
+
+  // 判断目录是否存在，不存在则创建
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true })
+  }
+
+  // 创建文件，如果文件已存在则会覆盖原有文件内容（可根据需求调整）
+  fs.writeFileSync(filePath, content, { flag: 'w' })
+
+  console.log(`文件 ${filePath} 创建成功`)
 }

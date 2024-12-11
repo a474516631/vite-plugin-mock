@@ -8,13 +8,13 @@ import url from 'url'
 import fg from 'fast-glob'
 import Mock from 'mockjs'
 import { pathToRegexp, match } from 'path-to-regexp'
-import { isArray, isFunction, sleep, isRegExp, isAbsPath } from './utils'
+import { isArray, isFunction, sleep, isRegExp, isAbsPath, createFileWithDir } from './utils'
 import { IncomingMessage, NextHandleFunction } from 'connect'
 import { bundleRequire, GetOutputFile, JS_EXT_RE } from 'bundle-require'
 import type { ResolvedConfig } from 'vite'
 
 export let mockData: MockMethod[] = []
-
+export let zybAbsMockPath = ''
 export async function createMockServer(
   opt: ViteMockOptions = { mockPath: 'mock', configPath: 'vite.mock.config' },
   config: ResolvedConfig,
@@ -89,7 +89,7 @@ export async function requestMiddleware(opt: ViteMockOptions) {
         const body = await parseJson(req)
         res.setHeader('Content-Type', 'application/json')
         if (opt) {
-          res.setHeader('Access-Control-Allow-Credentials', true)
+          res.setHeader('Access-Control-Allow-Credentials', 'true')
           res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*')
         }
         res.statusCode = statusCode || 200
@@ -100,6 +100,54 @@ export async function requestMiddleware(opt: ViteMockOptions) {
       }
 
       logger && loggerOutput('request invoke', req.url!)
+      return
+    } else if (reqUrl?.startsWith('/api/')) {
+      // 运行时未匹配到请求，动态创建一个空的mock数据
+      const { url: reqUrl } = req
+      console.log('non match', reqUrl)
+      const dirs = path.join(zybAbsMockPath, `${reqUrl?.replace('/api/', '')}`)
+      const requestFilePath = path.join(dirs, `index.ts`)
+      let resObj = {
+        code: 0,
+        message: 'ok',
+        data: {},
+      }
+
+      if (!fs.existsSync(path.join(dirs, `data/index.json`))) {
+        createFileWithDir(path.join(dirs, `data/index.json`), JSON.stringify(resObj))
+      } else {
+        try {
+          resObj = JSON.parse(fs.readFileSync(path.join(dirs, `data/index.json`), 'utf-8'))
+        } catch (error) {
+          // resObj = {}
+          console.log('json parse error', error)
+        }
+      }
+      console.log('@@@@@@@@@@@@@@@@')
+      if (!fs.existsSync(requestFilePath)) {
+        createFileWithDir(
+          requestFilePath,
+          `
+          import indexJson from './data/index.json'
+          export default () => {
+            return {
+              url: '${reqUrl}',
+              method: 'get',
+              response: () => {
+                return indexJson
+              },
+            }
+          }`,
+        )
+      }
+      res.setHeader('Content-Type', 'application/json')
+      if (opt) {
+        res.setHeader('Access-Control-Allow-Credentials', 'true')
+        res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*')
+      }
+      res.statusCode = 200
+
+      res.end(JSON.stringify(Mock.mock(resObj)))
       return
     }
     next()
@@ -180,7 +228,7 @@ function parseJson(req: IncomingMessage): Promise<Recordable> {
 async function getMockConfig(opt: ViteMockOptions, config: ResolvedConfig) {
   const { absConfigPath, absMockPath } = getPath(opt)
   const { ignore, configPath, logger } = opt
-
+  zybAbsMockPath = absMockPath
   let ret: MockMethod[] = []
 
   if (configPath && fs.existsSync(absConfigPath)) {
