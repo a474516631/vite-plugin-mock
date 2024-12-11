@@ -128,16 +128,16 @@ export async function requestMiddleware(opt: ViteMockOptions) {
         createFileWithDir(
           requestFilePath,
           `
-          import indexJson from './data/index.json'
-          export default () => {
-            return {
-              url: '${reqUrl}',
-              method: 'get',
-              response: () => {
-                return indexJson
-              },
-            }
-          }`,
+import indexJson from './data/index.json'
+export default () => {
+  return {
+    url: '${reqUrl}',
+    method: ${req.method},
+    response: () => {
+      return indexJson
+    },
+  }
+}`,
         )
       }
       res.setHeader('Content-Type', 'application/json')

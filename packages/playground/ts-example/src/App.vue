@@ -74,7 +74,7 @@ export default defineComponent({
 
     const testRestful = () => {
       requestLists.value[1].show = true
-      axios.get('/api/testRestful2/1').then(({ data }) => {
+      axios.get('/api/testRestful/1').then(({ data }) => {
         requestLists.value[1].info = data
         requestLists.value[1].show = false
       })
