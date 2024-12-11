@@ -10,11 +10,6 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.cjs"
-    },
-    "./client": {
-      "types": "./dist/client.d.ts",
-      "import": "./dist/client.mjs",
-      "require": "./dist/client.cjs"
     }
   },
   "files": [
@@ -26,8 +21,8 @@
   },
   "scripts": {
     "clean": "rimraf dist && rimraf es",
-    "dev": "unbuild --stub",
-    "build": "unbuild",
+    "dev": "unbuild --stub && vite",
+    "build": "unbuild && vite build",
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "prepublishOnly": "npm run build"
   },
@@ -54,7 +49,17 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
     "path-to-regexp": "^6.2.1",
-    "picocolors": "^1.0.0"
+    "picocolors": "^1.0.0",
+    "@langchain/core": "^0.3.13",
+    "@langchain/openai": "^0.3.11",
+    "@unocss/reset": "^0.63.4",
+    "@vueuse/core": "^11.1.0",
+    "floating-vue": "^5.2.2",
+    "shiki": "^1.22.0",
+    "sirv": "^2.0.4",
+    "splitpanes": "^3.1.5",
+    "vue": "^3.5.12",
+    "vue-router": "^4.1.6"
   },
   "peerDependencies": {
     "mockjs": ">=1.1.0",
@@ -70,7 +75,23 @@
     "rimraf": "^5.0.0",
     "tsup": "6.7.0",
     "typescript": "^5.0.4",
-    "unbuild": "^1.2.1",
-    "vite": "4.2.1"
+    "@iconify-json/ant-design": "^1.2.2",
+    "@iconify-json/carbon": "^1.2.3",
+    "@iconify-json/vscode-icons": "^1.2.2",
+    "@unocss/core": "^0.63.4",
+    "@unocss/preset-attributify": "^0.63.4",
+    "@unocss/preset-icons": "^0.63.4",
+    "@unocss/preset-uno": "^0.63.4",
+    "@unocss/preset-web-fonts": "^0.63.4",
+    "@unocss/vite": "^0.63.4",
+    "@vitejs/plugin-vue": "^5.1.4",
+    "unbuild": "^2.0.0",
+    "unocss": "^0.63.4",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-icons": "^0.19.3",
+    "unplugin-vue-components": "^0.27.4",
+    "vite": "^5.4.9",
+    "vite-plugin-pages": "^0.28.0",
+    "vue-docgen-api": "^4.79.2"
   }
 }

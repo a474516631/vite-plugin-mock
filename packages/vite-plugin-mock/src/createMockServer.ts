@@ -103,7 +103,6 @@ export async function requestMiddleware(opt: ViteMockOptions) {
       return
     } else if (reqUrl?.startsWith('/api/')) {
       // 运行时未匹配到请求，动态创建一个空的mock数据
-      const { url: reqUrl } = req
       console.log('non match', reqUrl)
       const dirs = path.join(zybAbsMockPath, `${reqUrl?.replace('/api/', '')}`)
       const requestFilePath = path.join(dirs, `index.ts`)
@@ -132,7 +131,7 @@ import indexJson from './data/index.json'
 export default () => {
   return {
     url: '${reqUrl}',
-    method: ${req.method},
+    method: '${req.method}',
     response: () => {
       return indexJson
     },
