@@ -16,7 +16,7 @@
             <span>{{ item.name }}</span>
             <el-button
               class="button"
-              size="mini"
+              size="small"
               type="primary"
               plain
               @click="sendRequest(key, item)"
@@ -33,6 +33,7 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
+import { bailingStudentDetail } from './request/student';
 export default defineComponent({
   name: 'App',
   setup() {
@@ -59,6 +60,11 @@ export default defineComponent({
       },
       {
         name: 'Post Form-data',
+        info: '暂无数据',
+        show: false,
+      },
+      {
+        name: 'UserDetail',
         info: '暂无数据',
         show: false,
       },
@@ -118,6 +124,24 @@ export default defineComponent({
         })
     }
 
+
+    const studentDetail = () => {
+      requestLists.value[5].show = true
+
+      bailingStudentDetail({
+        assistantUid: 4271322074,
+        courseId: 3160759,
+        studentUid: 2634528742,
+        personUid: 3000137423,
+        studentRemoteId: 7881300169079775
+      }).then((data) => {
+        console.log(data)
+        requestLists.value[5].info = data
+        requestLists.value[5].show = false
+
+      })
+    }
+
     const sendRequest = (key, item) => {
       switch (key) {
         case 0:
@@ -134,6 +158,9 @@ export default defineComponent({
           break
         case 4:
           testPostFormData()
+          break
+        case 5:
+          studentDetail()
           break
         default:
           getRoleById()

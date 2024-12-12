@@ -5,6 +5,5 @@ const route = useRoute()
 
 <template>
   <!-- <TestText class="hidden" color="red" bgColor="blue" text="Hello World"></TestText> -->
-   {{ route.query }}
   <ModuleInfo :url="route.query.url" :method="route.query.method"/>
 </template>

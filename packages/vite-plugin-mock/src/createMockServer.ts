@@ -3,12 +3,20 @@ import type { ViteMockOptions, MockMethod, Recordable, RespThisType } from './ty
 import path from 'node:path'
 import fs from 'node:fs'
 import chokidar from 'chokidar'
-import colors from 'picocolors'
 import url from 'url'
 import fg from 'fast-glob'
+
 import Mock from 'mockjs'
 import { pathToRegexp, match } from 'path-to-regexp'
-import { isArray, isFunction, sleep, isRegExp, isAbsPath, createFileWithDir } from './utils'
+import {
+  isArray,
+  isFunction,
+  sleep,
+  isRegExp,
+  isAbsPath,
+  createFileWithDir,
+  loggerOutput,
+} from './utils'
 import { IncomingMessage, NextHandleFunction } from 'connect'
 import { bundleRequire, GetOutputFile, JS_EXT_RE } from 'bundle-require'
 import type { ResolvedConfig } from 'vite'
@@ -59,7 +67,7 @@ export async function requestMiddleware(opt: ViteMockOptions) {
       }
       return pathToRegexp(item.url).test(reqUrl)
     })
-
+    // console.log('non match', reqUrl)
     if (matchRequest) {
       const isGet = req.method && req.method.toUpperCase() === 'GET'
       const { response, rawResponse, timeout, statusCode, url } = matchRequest
@@ -101,53 +109,53 @@ export async function requestMiddleware(opt: ViteMockOptions) {
 
       logger && loggerOutput('request invoke', req.url!)
       return
-    } else if (reqUrl?.startsWith('/api/')) {
+    }
+
+    if (reqUrl?.startsWith('/api/')) {
       // 运行时未匹配到请求，动态创建一个空的mock数据
-      console.log('non match', reqUrl)
-      const dirs = path.join(zybAbsMockPath, `${reqUrl?.replace('/api/', '')}`)
-      const requestFilePath = path.join(dirs, `index.ts`)
-      let resObj = {
-        code: 0,
-        message: 'ok',
-        data: {},
-      }
-
-      if (!fs.existsSync(path.join(dirs, `data/index.json`))) {
-        createFileWithDir(path.join(dirs, `data/index.json`), JSON.stringify(resObj))
-      } else {
-        try {
-          resObj = JSON.parse(fs.readFileSync(path.join(dirs, `data/index.json`), 'utf-8'))
-        } catch (error) {
-          // resObj = {}
-          console.log('json parse error', error)
-        }
-      }
-      console.log('@@@@@@@@@@@@@@@@')
-      if (!fs.existsSync(requestFilePath)) {
-        createFileWithDir(
-          requestFilePath,
-          `
-import indexJson from './data/index.json'
-export default () => {
-  return {
-    url: '${reqUrl}',
-    method: '${req.method}',
-    response: () => {
-      return indexJson
-    },
-  }
-}`,
-        )
-      }
-      res.setHeader('Content-Type', 'application/json')
-      if (opt) {
-        res.setHeader('Access-Control-Allow-Credentials', 'true')
-        res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*')
-      }
-      res.statusCode = 200
-
-      res.end(JSON.stringify(Mock.mock(resObj)))
-      return
+      // console.log('non match', reqUrl,res)
+      //       const dirs = path.join(zybAbsMockPath, `${reqUrl?.replace('/api/', '')}`)
+      //       const requestFilePath = path.join(dirs, `index.ts`)
+      //       let resObj = {
+      //         code: 0,
+      //         message: 'ok',
+      //         data: {},
+      //       }
+      //       if (!fs.existsSync(path.join(dirs, `data/index.json`))) {
+      //         createFileWithDir(path.join(dirs, `data/index.json`), JSON.stringify(resObj))
+      //       } else {
+      //         try {
+      //           resObj = JSON.parse(fs.readFileSync(path.join(dirs, `data/index.json`), 'utf-8'))
+      //         } catch (error) {
+      //           // resObj = {}
+      //           console.log('json parse error', error)
+      //         }
+      //       }
+      //       console.log('@@@@@@@@@@@@@@@@')
+      //       if (!fs.existsSync(requestFilePath)) {
+      //         createFileWithDir(
+      //           requestFilePath,
+      //           `
+      // import indexJson from './data/index.json'
+      // export default () => {
+      //   return {
+      //     url: '${reqUrl}',
+      //     method: '${req.method}',
+      //     response: () => {
+      //       return indexJson
+      //     },
+      //   }
+      // }`,
+      //         )
+      //       }
+      //       res.setHeader('Content-Type', 'application/json')
+      //       if (opt) {
+      //         res.setHeader('Access-Control-Allow-Credentials', 'true')
+      //         res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*')
+      //       }
+      //       res.statusCode = 200
+      //       res.end(JSON.stringify(Mock.mock(resObj)))
+      //       return
     }
     next()
   }
@@ -314,13 +322,4 @@ function getPath(opt: ViteMockOptions) {
     absMockPath,
     absConfigPath,
   }
-}
-
-function loggerOutput(title: string, msg: string, type: 'info' | 'error' = 'info') {
-  const tag = type === 'info' ? colors.cyan(`[vite:mock]`) : colors.red(`[vite:mock-server]`)
-  return console.log(
-    `${colors.dim(new Date().toLocaleTimeString())} ${tag} ${colors.green(title)} ${colors.dim(
-      msg,
-    )}`,
-  )
 }

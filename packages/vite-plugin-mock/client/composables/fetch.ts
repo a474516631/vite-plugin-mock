@@ -12,9 +12,10 @@ onConfigChanged(() => {
   infoFetch.execute()
 })
 
-export function fetchModule(url: string | Ref<string>, method = 'get') {
+export function fetchModule(url: string | Ref<string>, method: string | Ref<string>) {
+  console.log(url, method)
   const result = useFetch(
-    computed(() => `${API_ROOT}/api?url=${encodeURIComponent(unref(url))}&method=${method}`),
+    computed(() => `${unref(url)}`),
     {
       refetch: true,
       fetchOptions: {
@@ -23,12 +24,14 @@ export function fetchModule(url: string | Ref<string>, method = 'get') {
         },
       },
     },
-  ).json<any>()
+  )
+    [computed(() => `${unref(method)}`).value.toLocaleLowerCase()]()
+    .json<any>()
 
   // onConfigChanged(() => result.execute())
   // onModuleUpdated((update) => {
   //   console.log('update', update)
-  //   if (update.path === unref(id) || update.path === unref(id).slice(8)) {
+  //   if (update.path === unref(url) || update.path === unref(url).slice(8)) {
   //     setTimeout(() => {
   //       result.execute()
   //     }, 50)

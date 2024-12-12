@@ -1,0 +1,36 @@
+{
+  "errNo": 0,
+  "errMsg": "succ",
+  "data": {
+    "studentUid": 2634528742,
+    "encryptedStudentUid": "b08cad376173b502d752de28b8ad5235",
+    "studentName": "张金波",
+    "namePinyin": [
+      {
+        "chinese": "张",
+        "pinyin": "zhāng"
+      },
+      {
+        "chinese": "金",
+        "pinyin": "jīn"
+      },
+      {
+        "chinese": "波",
+        "pinyin": "bō"
+      }
+    ],
+    "nickname": "大栗同学AT065",
+    "sex": 1,
+    "grade": "",
+    "school": "",
+    "phone": "156****3912",
+    "area": "",
+    "assistantUid": 4271322074,
+    "assistantPhone": "133****8650",
+    "belongObj": {
+      "belongVal": 3,
+      "belongStr": "爸爸"
+    },
+    "deviceInfo": ""
+  }
+}

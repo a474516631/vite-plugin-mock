@@ -9,9 +9,10 @@
 import type { ViteMockOptions } from './types'
 import type { Plugin } from 'vite'
 import { ResolvedConfig } from 'vite'
-import { createMockServer, matchMockRequest, mockData, requestMiddleware } from './createMockServer'
+import { createMockServer, mockData, requestMiddleware } from './createMockServer'
 import sirv from 'sirv'
 import path from 'path'
+import { serverProxyConfig } from './serverProxyConfig'
 
 export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   let isDev = false
@@ -20,6 +21,49 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   return {
     name: 'vite:mock',
     enforce: 'pre' as const,
+
+    config(config, env) {
+      if (config.server && config.server.proxy) {
+        const { proxy } = config.server
+        const prefix = opt?.prefix || '/api'
+        Object.keys(proxy).forEach((key) => {
+          if (typeof proxy[key] === 'string') {
+            const target = proxy[key]
+            proxy[key] = {
+              target: proxy[key],
+              configure: (proxy) =>
+                serverProxyConfig({
+                  proxy,
+                  target: target,
+                  prefix: prefix,
+                  queryExclude: ['_'],
+                  record: opt?.record,
+                  recordExclude: opt?.recordExclude,
+                  logger: opt?.logger,
+                }),
+            }
+          }
+          if (!proxy[key].configure) {
+            const target = proxy[key].target
+            if (typeof target === 'string') {
+              proxy[key] = {
+                ...proxy[key],
+                configure: (proxy) =>
+                  serverProxyConfig({
+                    proxy,
+                    target: target,
+                    prefix: prefix,
+                    queryExclude: ['_'],
+                    record: opt?.record,
+                    recordExclude: opt?.recordExclude,
+                    logger: opt?.logger,
+                  }),
+              }
+            }
+          }
+        })
+      }
+    },
     configResolved(resolvedConfig) {
       config = resolvedConfig
       isDev = config.command === 'serve'
@@ -57,12 +101,15 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
           // 这里需要获取request的类型
           res.write(JSON.stringify(mockData))
           res.end()
+          return
         }
         next()
       })
 
       const middleware = await requestMiddleware(opt)
       middlewares.use(middleware)
+      // const recordMiddleware = await recordRequestMiddleware(opt)
+      // middlewares.use(recordMiddleware)
     },
   }
 }

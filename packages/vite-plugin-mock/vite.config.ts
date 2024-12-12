@@ -11,17 +11,10 @@ import IconsResolver from 'unplugin-icons/resolver'
 import { viteMockServe } from 'vite-plugin-mock'
 
 export default defineConfig(({ command }) => ({
-  // resolve: {
-  //   alias,
-  // },
   base: command === 'build' ? '/__mock/' : '/',
   plugins: [
     UnoCSS(),
-    // LarkInspector(
-    //   {
-    //     componentsDir: './components',
-    //   }
-    // ),
+
     Vue(),
     viteMockServe({
       mockPath: 'mock',

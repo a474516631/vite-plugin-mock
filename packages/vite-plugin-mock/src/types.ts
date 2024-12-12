@@ -8,6 +8,9 @@ export interface ViteMockOptions {
   enable?: boolean
   logger?: boolean
   cors?: boolean
+  prefix?: string
+  record?: boolean
+  recordExclude?: string | string[]
 }
 
 export interface RespThisType {

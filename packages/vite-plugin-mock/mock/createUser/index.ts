@@ -1,7 +1,7 @@
 import indexJson from './data/index.json'
 export default () => {
   return {
-    url: '/api/testRestful2/1',
+    url: '/api/createUser',
     method: 'GET',
     response: () => {
       return indexJson
