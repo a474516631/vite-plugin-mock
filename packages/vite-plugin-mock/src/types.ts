@@ -11,6 +11,7 @@ export interface ViteMockOptions {
   prefix?: string
   record?: boolean
   recordExclude?: string | string[]
+  requestPath?: string
 }
 
 export interface RespThisType {

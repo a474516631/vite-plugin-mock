@@ -12,6 +12,7 @@ export default (): UserConfigExport => {
         mockPath: 'mock',
         enable: true,
         logger: true,
+        requestPath: 'src/request',
       }),
     ],
     server: {

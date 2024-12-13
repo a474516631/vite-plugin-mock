@@ -7,12 +7,13 @@
 })()
 
 import type { ViteMockOptions } from './types'
-import type { Plugin } from 'vite'
+import type { Plugin, ProxyOptions } from 'vite'
 import { ResolvedConfig } from 'vite'
 import { createMockServer, mockData, requestMiddleware } from './createMockServer'
 import sirv from 'sirv'
 import path from 'path'
 import { serverProxyConfig } from './serverProxyConfig'
+import { createRequestTsServer, requestTsData } from './createTsTypeServer'
 
 export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   let isDev = false
@@ -34,7 +35,7 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
               configure: (proxy) =>
                 serverProxyConfig({
                   proxy,
-                  target: target,
+                  target: target as string,
                   prefix: prefix,
                   queryExclude: ['_'],
                   record: opt?.record,
@@ -43,11 +44,11 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
                 }),
             }
           }
-          if (!proxy[key].configure) {
-            const target = proxy[key].target
+          if (!(proxy[key] as ProxyOptions).configure) {
+            const target = (proxy[key] as ProxyOptions).target as string
             if (typeof target === 'string') {
               proxy[key] = {
-                ...proxy[key],
+                ...(proxy[key] as ProxyOptions),
                 configure: (proxy) =>
                   serverProxyConfig({
                     proxy,
@@ -68,6 +69,7 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       config = resolvedConfig
       isDev = config.command === 'serve'
       isDev && createMockServer(opt, config)
+      isDev && createRequestTsServer(opt, config)
     },
 
     configureServer: async ({ middlewares }) => {
@@ -75,7 +77,6 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       if (!enable) {
         return
       }
-
       middlewares.use(
         '/__mock',
         sirv(path.resolve(__dirname, '../dist/client'), {
@@ -94,12 +95,11 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
           res.end()
           return
         }
-
-        if (req.url.startsWith('/api')) {
+        if (req.url === '/type-api') {
           res.statusCode = 200
           res.setHeader('Content-Type', 'application/json')
           // 这里需要获取request的类型
-          res.write(JSON.stringify(mockData))
+          res.write(JSON.stringify(requestTsData))
           res.end()
           return
         }

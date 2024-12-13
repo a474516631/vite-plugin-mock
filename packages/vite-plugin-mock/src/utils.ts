@@ -157,3 +157,12 @@ export function resolveUrlPathnameSearch(url: string, queryExclude?: string[]) {
   search = search.replace('?', '')
   return { pathname, search }
 }
+
+/**
+ * 替换单引号和双引号
+ * @param str
+ * @returns
+ */
+export function likeStrToStr(str: string) {
+  return str.replaceAll(/'|"|`/g, '')
+}

@@ -28,7 +28,7 @@ function openEditor() {
 watchEffect(async () => {
   const html = await codeToHtml(JSON.stringify(mockData.data.value, null, 2), {
       lang: 'json',
-      theme: 'github-dark'
+      theme: 'github'
     })
   jsonHtml.value = html
 })
