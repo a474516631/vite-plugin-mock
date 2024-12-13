@@ -20,6 +20,7 @@ export async function createRequestTsServer(
     configPath: 'vite.mock.config.ts',
     logger: true,
     cors: true,
+    prefix: '/api',
     ...opt,
   }
 
@@ -77,7 +78,10 @@ async function getTsType(opt: ViteMockOptions, config: ResolvedConfig) {
     let requestMap: Recordable = {}
     for (let index = 0; index < mockFiles.length; index++) {
       const mockFile = mockFiles[index]
-      requestMap = { ...requestMap, ...extractRequestInfo(path.join(absRequestPath, mockFile)) }
+      requestMap = {
+        ...requestMap,
+        ...extractRequestInfo(path.join(absRequestPath, mockFile), opt),
+      }
     }
     return requestMap
   } catch (error: any) {
@@ -97,9 +101,8 @@ function getPath(opt: ViteMockOptions) {
 }
 
 // 用于提取请求相关信息的主函数
-function extractRequestInfo(filePath: string): Recordable {
+function extractRequestInfo(filePath: string, opt: ViteMockOptions): Recordable {
   const fileContent: string = fs.readFileSync(filePath, 'utf8')
-
   const map: Recordable = {}
   const ast = parse(Lang.TypeScript, fileContent)
   const root = ast.root() // root is an instance of SgNode
@@ -114,7 +117,7 @@ function extractRequestInfo(filePath: string): Recordable {
     if (!url) {
       return
     }
-    url = likeStrToStr(url)
+    url = `${opt.prefix || ''}${likeStrToStr(url)}`
 
     const typeObj: Recordable = {}
     if (req) {

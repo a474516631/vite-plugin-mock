@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import ModuleInfo from '../../components/ModuleInfo.vue'
+import { useRoute } from 'vue-router'
 const route = useRoute()
 </script>
 

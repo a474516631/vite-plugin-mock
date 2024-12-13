@@ -20,6 +20,7 @@ export default defineConfig(({ command }) => ({
       mockPath: 'mock',
       enable: true,
       logger: true,
+      requestPath: './client/request',
     }),
     Components({
       resolvers: [IconsResolver()],
