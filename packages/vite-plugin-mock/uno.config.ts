@@ -28,6 +28,7 @@ export function createConfig(): VitePluginConfig {
     shortcuts: {
       'border-main': 'border-gray:20',
       'bg-active': 'bg-gray:8',
+      loading: 'animate-spin ',
     },
   }
 }

@@ -12,6 +12,8 @@ export interface ViteMockOptions {
   record?: boolean
   recordExclude?: string | string[]
   requestPath?: string
+  openAIApiKey?: string
+  modelName?: string
 }
 
 export interface RespThisType {

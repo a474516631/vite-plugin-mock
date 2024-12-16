@@ -5,7 +5,7 @@
     throw new Error('vite-plugin-vue-mock requires mockjs to be present in the dependency tree.')
   }
 })()
-
+import url from 'url'
 import type { ViteMockOptions } from './types'
 import type { Plugin, ProxyOptions } from 'vite'
 import { ResolvedConfig } from 'vite'
@@ -14,6 +14,7 @@ import sirv from 'sirv'
 import path from 'path'
 import { serverProxyConfig } from './serverProxyConfig'
 import { createRequestTsServer, requestTsData } from './createTsTypeServer'
+import { getMockData } from './suggestionGpt'
 
 export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   let isDev = false
@@ -103,6 +104,44 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
           res.end()
           return
         }
+        console.log(req.url)
+        if (req.url.startsWith('/ai-mock')) {
+          let queryParams: {
+            query?: {
+              [key: string]: any
+            }
+            pathname?: string | null
+          } = {}
+
+          if (req.url) {
+            queryParams = url.parse(req.url, true)
+          }
+          const reqUrlParams = queryParams
+          console.log(reqUrlParams)
+          if (!queryParams.query?.url) {
+            return
+          }
+          const resType = requestTsData[queryParams.query.url]?.resType
+          res.statusCode = 200
+          res.setHeader('Content-Type', 'application/json')
+          if (opt.openAIApiKey) {
+            res.write(
+              await getMockData(resType, {
+                openAIApiKey: opt.openAIApiKey,
+                modelName: opt.modelName || 'gpt-3.5-turbo',
+              }),
+            )
+          } else {
+            res.write(
+              JSON.stringify({
+                error: '请配置open AI的key',
+              }),
+            )
+          }
+          res.end()
+          return
+        }
+
         next()
       })
 

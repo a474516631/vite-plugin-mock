@@ -35,8 +35,11 @@ export interface IStudentStudentdetailResData {
   area?: string
   assistantUid?: number
   assistantPhone?: string
+
   belongObj?: {
+    // 身份，例如：爸爸、妈妈、老师、学生、其他
     belongStr: string
+    // 身份值， 1，2，3，4，5
     belongVal: string
   }
   deviceInfo?: string

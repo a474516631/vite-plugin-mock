@@ -3,6 +3,7 @@ import {  computed,  ref, watch, watchEffect } from 'vue';
 import { codeToHtml } from 'shiki'
 import { standFetch } from '../request';
 import { useDark } from '@vueuse/core';
+import { useHTMLPrettify, useJSONPrettify, useJSPrettify } from '../composables/usePrettify';
 const props = defineProps<{ url: string, method: string }>()
 const emptyCode = ref('')
 const showDemo = ref(false)
@@ -13,6 +14,10 @@ const mockData = ref({})
 const typeData = ref({})
 const resTypeHtml = ref('')
 const reqTypeHtml = ref('')
+const mockRes = ref('')
+const mockResShow = ref(false)
+const aiLoading = ref(false)
+const mockResHtml = ref('')
 
 watchEffect(async () => {
   const res = await standFetch.fetch(props.url, {
@@ -64,6 +69,22 @@ watchEffect(async () => {
 
 })
 
+watchEffect(async () => {
+  if(mockRes.value){
+    const res = mockRes.value
+    // const resHtml = new JSONFormatter(JSON.stringify(res));
+    const htmlRes = useJSONPrettify(JSON.stringify(res))
+    const resHtml = await codeToHtml(htmlRes.value, {
+      lang: 'json',
+      theme: isDark.value? 'github-dark' : 'github-light',
+      // theme: 'github-light',
+    })
+    mockResHtml.value = resHtml
+  }else{
+    mockResHtml.value = ''
+  }
+})
+
 
 function openEditor() {
   fetch(`/__open-in-editor?file=${encodeURIComponent(props.url)}`)
@@ -90,6 +111,26 @@ onMounted(async ()=>{
   console.log(res)
   typeData.value = res
 })
+
+
+
+async function getAiMockRes(){
+  aiLoading.value = true
+  mockResShow.value = true
+  const res = await standFetch.get('/__mock_api/ai-mock', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    query:{
+      url:props.url,
+    }
+  })
+
+  mockRes.value = res as any
+  aiLoading.value = false
+
+}
 
 </script>
 <template>
@@ -120,8 +161,23 @@ onMounted(async ()=>{
           <div px1 ml1 mr-2 op-60 shrink-0>Mock Data</div>
         </div>
         <div class="pt-20px " border="t main" pa-4 v-html="jsonHtml"></div>
-        <div class="fixed right-10 bottom-10 cursor-pointer">
-          <img class="w-50px " src="/ai-float-person.png" alt="">
+        <div class="fixed right-10 bottom-10 " >
+          <img class="w-50px cursor-pointer " src="/ai-float-person.png" alt="" @click="mockResShow = true">
+          <div  border="main 1" v-show="mockResShow"   class="p-4 absolute right-12 bottom-10 w-500px min-h-300px overflow-y-auto bg-white  dark:bg-black" >
+            <div class="flex flex-col">
+              <div class="flex flex-col">
+                <div class="text-14px font-bold ">AI Mock</div>
+                <div class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">点击生成 Mock 数据</div>
+              </div>
+              <div class="flex-1 flex items-center ">
+                <div v-if="aiLoading"  class="i-ant-design:loading-outlined w-4 h-4 animate-spin mr-4 text-blue"></div>
+                <div v-else v-html="mockResHtml"></div>
+
+              </div>
+
+            </div>
+            <div class="i-ant-design:close-outlined absolute right-4 top-4 cursor-pointer" @click="mockResShow = false"></div>
+          </div>
         </div>
       </div>
     </div>
@@ -134,4 +190,6 @@ onMounted(async ()=>{
 
 
 
-<style scoped></style>
+<style scoped>
+
+</style>
