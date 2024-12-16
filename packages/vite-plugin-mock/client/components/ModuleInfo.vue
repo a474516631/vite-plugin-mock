@@ -156,25 +156,37 @@ async function getAiMockRes(){
 
         </div>
       </div>
-      <div class="bg-white rounded-md mt-2 dark:bg-#24292e relative">
+      <div class="bg-white rounded-md mt-2 dark:bg-#24292e relative ">
         <div  text="gray/80" min-h-30px max-h-30px select-none flex all:my-auto>
           <div px1 ml1 mr-2 op-60 shrink-0>Mock Data</div>
         </div>
         <div class="pt-20px " border="t main" pa-4 v-html="jsonHtml"></div>
         <div class="fixed right-10 bottom-10 " >
           <img class="w-50px cursor-pointer " src="/ai-float-person.png" alt="" @click="mockResShow = true">
-          <div  border="main 1" v-show="mockResShow"   class="p-4 absolute right-12 bottom-10 w-500px min-h-300px overflow-y-auto bg-white  dark:bg-black" >
+          <div  border="main 1" v-show="mockResShow"
+          class="
+          p-4 absolute right-12 bottom-10 w-80vw min-h-300px overflow-y-auto bg-white rounded-2 shadow-2xl
+          dark:bg-black " >
             <div class="flex flex-col">
-              <div class="flex flex-col">
+              <div class="flex gap-2 items-center">
                 <div class="text-14px font-bold ">AI Mock</div>
-                <div class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">点击生成 Mock 数据</div>
+
               </div>
               <div class="flex-1 flex items-center ">
                 <div v-if="aiLoading"  class="i-ant-design:loading-outlined w-4 h-4 animate-spin mr-4 text-blue"></div>
                 <div v-else v-html="mockResHtml"></div>
 
               </div>
-
+              <div class="flex gap-4">
+                <div class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">
+                  <span class="i-ant-design:yuque-filled  mr-1 text-blue"></span>
+                  <span>生成 Mock 数据</span>
+                </div>
+                <div v-if="mockResHtml" class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">
+                  <span class="i-ant-design:edit-outlined mr-1"></span>
+                  <span>写入文件</span>
+                </div>
+              </div>
             </div>
             <div class="i-ant-design:close-outlined absolute right-4 top-4 cursor-pointer" @click="mockResShow = false"></div>
           </div>
