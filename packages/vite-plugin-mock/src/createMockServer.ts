@@ -111,52 +111,6 @@ export async function requestMiddleware(opt: ViteMockOptions) {
       return
     }
 
-    if (reqUrl?.startsWith('/api/')) {
-      // 运行时未匹配到请求，动态创建一个空的mock数据
-      // console.log('non match', reqUrl,res)
-      //       const dirs = path.join(zybAbsMockPath, `${reqUrl?.replace('/api/', '')}`)
-      //       const requestFilePath = path.join(dirs, `index.ts`)
-      //       let resObj = {
-      //         code: 0,
-      //         message: 'ok',
-      //         data: {},
-      //       }
-      //       if (!fs.existsSync(path.join(dirs, `data/index.json`))) {
-      //         createFileWithDir(path.join(dirs, `data/index.json`), JSON.stringify(resObj))
-      //       } else {
-      //         try {
-      //           resObj = JSON.parse(fs.readFileSync(path.join(dirs, `data/index.json`), 'utf-8'))
-      //         } catch (error) {
-      //           // resObj = {}
-      //           console.log('json parse error', error)
-      //         }
-      //       }
-      //       console.log('@@@@@@@@@@@@@@@@')
-      //       if (!fs.existsSync(requestFilePath)) {
-      //         createFileWithDir(
-      //           requestFilePath,
-      //           `
-      // import indexJson from './data/index.json'
-      // export default () => {
-      //   return {
-      //     url: '${reqUrl}',
-      //     method: '${req.method}',
-      //     response: () => {
-      //       return indexJson
-      //     },
-      //   }
-      // }`,
-      //         )
-      //       }
-      //       res.setHeader('Content-Type', 'application/json')
-      //       if (opt) {
-      //         res.setHeader('Access-Control-Allow-Credentials', 'true')
-      //         res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*')
-      //       }
-      //       res.statusCode = 200
-      //       res.end(JSON.stringify(Mock.mock(resObj)))
-      //       return
-    }
     next()
   }
   return middleware

@@ -1,4 +1,4 @@
-import type { MockConfig } from 'vite-plugin-mock'
+import type { MockConfig } from 'vite-plugin-ai-mock'
 
 export default (config: MockConfig) => {
   return [

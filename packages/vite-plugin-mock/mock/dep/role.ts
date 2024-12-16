@@ -1,4 +1,4 @@
-import type { MockMethod } from 'vite-plugin-mock'
+import type { MockMethod } from 'vite-plugin-ai-mock'
 export default [
   {
     url: '/api/getRoleById',

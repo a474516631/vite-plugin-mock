@@ -20,6 +20,6 @@
     "cross-env": "^7.0.3",
     "typescript": "^5.0.4",
     "vite": "^4.2.1",
-    "vite-plugin-mock": "workspace:*"
+    "vite-plugin-ai-mock": "workspace:*"
   }
 }

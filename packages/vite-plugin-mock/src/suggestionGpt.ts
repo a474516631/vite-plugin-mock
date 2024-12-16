@@ -1,27 +1,5 @@
 import { getAiModel } from './model'
-import { RunnableSequence } from '@langchain/core/runnables'
 import { PromptTemplate } from '@langchain/core/prompts'
-export async function addSuggestionToCode(comInfo: any) {
-  if (!comInfo.props) return
-
-  const parser = StructuredOutputParser.fromZodSchema(z.object({}))
-
-  const chain = RunnableSequence.from([
-    PromptTemplate.fromTemplate(
-      `
-`,
-    ),
-    chatModel,
-    parser,
-  ])
-  console.log(parser.getFormatInstructions())
-  const response = await chain.invoke({
-    metaInfo: comInfo,
-    format_instructions: parser.getFormatInstructions(),
-    props: comInfo.props,
-  })
-  return response
-}
 
 // 定义Prompt模板，用于指导AI生成符合要求的Mock数据
 const promptTemplate = PromptTemplate.fromTemplate(`

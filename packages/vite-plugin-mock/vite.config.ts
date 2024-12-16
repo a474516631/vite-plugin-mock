@@ -8,7 +8,7 @@ import UnoCSS from 'unocss/vite'
 // import LarkInspector from './src/index'
 import UnIcon from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import { viteMockServe } from 'vite-plugin-mock'
+import { viteMockServe } from 'vite-plugin-ai-mock'
 
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? '/__mock/' : '/',
@@ -20,6 +20,7 @@ export default defineConfig(({ command }) => ({
       mockPath: 'mock',
       enable: true,
       logger: true,
+      record: true,
       requestPath: './client/request',
     }),
     Components({

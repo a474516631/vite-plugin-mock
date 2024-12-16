@@ -15,6 +15,11 @@ import path from 'path'
 import { serverProxyConfig } from './serverProxyConfig'
 import { createRequestTsServer, requestTsData } from './createTsTypeServer'
 import { getMockData } from './suggestionGpt'
+import { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const _dirname =
+  typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
 
 export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   let isDev = false
@@ -28,32 +33,16 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       if (config.server && config.server.proxy) {
         const { proxy } = config.server
         const prefix = opt?.prefix || '/api'
-        Object.keys(proxy).forEach((key) => {
-          if (typeof proxy[key] === 'string') {
-            const target = proxy[key]
-            proxy[key] = {
-              target: proxy[key],
-              configure: (proxy) =>
-                serverProxyConfig({
-                  proxy,
-                  target: target as string,
-                  prefix: prefix,
-                  queryExclude: ['_'],
-                  record: opt?.record,
-                  recordExclude: opt?.recordExclude,
-                  logger: opt?.logger,
-                }),
-            }
-          }
-          if (!(proxy[key] as ProxyOptions).configure) {
-            const target = (proxy[key] as ProxyOptions).target as string
-            if (typeof target === 'string') {
+        if (opt.record) {
+          Object.keys(proxy).forEach((key) => {
+            if (typeof proxy[key] === 'string') {
+              const target = proxy[key]
               proxy[key] = {
-                ...(proxy[key] as ProxyOptions),
+                target: proxy[key],
                 configure: (proxy) =>
                   serverProxyConfig({
                     proxy,
-                    target: target,
+                    target: target as string,
                     prefix: prefix,
                     queryExclude: ['_'],
                     record: opt?.record,
@@ -62,8 +51,26 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
                   }),
               }
             }
-          }
-        })
+            if (!(proxy[key] as ProxyOptions).configure) {
+              const target = (proxy[key] as ProxyOptions).target as string
+              if (typeof target === 'string') {
+                proxy[key] = {
+                  ...(proxy[key] as ProxyOptions),
+                  configure: (proxy) =>
+                    serverProxyConfig({
+                      proxy,
+                      target: target,
+                      prefix: prefix,
+                      queryExclude: ['_'],
+                      record: opt?.record,
+                      recordExclude: opt?.recordExclude,
+                      logger: opt?.logger,
+                    }),
+                }
+              }
+            }
+          })
+        }
       }
     },
     configResolved(resolvedConfig) {
@@ -80,7 +87,7 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       }
       middlewares.use(
         '/__mock',
-        sirv(path.resolve(__dirname, '../dist/client'), {
+        sirv(path.resolve(_dirname, '../dist/client'), {
           single: true,
           dev: true,
         }),
