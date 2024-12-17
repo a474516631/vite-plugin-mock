@@ -247,9 +247,14 @@ class ServerMockProxy {
             prefix: this.prefix,
           }),
         )
+        this.logger &&
+          loggerOutput(`🚀 录制成功 生成 mock ts文件: `, `${pathname}, mock文件地址：${tsPath}`)
       }
-      if (!fs.existsSync(jsonPath)) createFileWithDir(jsonPath, JSON.stringify(parsedBody, null, 2))
-      this.logger && loggerOutput(`🚀 录制成功 : `, `${pathname}, mock文件地址：${tsPath}`)
+      if (!fs.existsSync(jsonPath)) {
+        createFileWithDir(jsonPath, JSON.stringify(parsedBody, null, 2))
+        this.logger &&
+          loggerOutput(`🚀 录制成功.写入 json 文件 : `, `${pathname}, mock文件地址：${jsonPath}`)
+      }
     } catch (e) {
       console.error('writeMockDataError', e)
     }

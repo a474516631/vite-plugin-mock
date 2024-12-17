@@ -66,6 +66,7 @@ export const moduleTree = computed(() => {
   const inRoot: ModuleDest[] = []
   // const inNodeModules: ModuleDest[] = []
   info.value
+    .filter((i) => i.url)
     .map((item) => ({ path: item.url, full: item.url, ...item }))
     .forEach((i) => {
       inRoot.push(i)
