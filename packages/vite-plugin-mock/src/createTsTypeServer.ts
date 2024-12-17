@@ -107,9 +107,12 @@ function extractRequestInfo(filePath: string, opt: ViteMockOptions): Recordable 
   const ast = parse(Lang.TypeScript, fileContent)
   const root = ast.root() // root is an instance of SgNode
 
-  const exportFuns = root.findAll(`export function $NAME($$$:$REQ_TYPE):Promise<$RES_TYPE> {
+  const exportFuns = root.findAll(
+    opt.findInterfaceType ??
+      `export function $NAME($$$:$REQ_TYPE):Promise<$RES_TYPE> {
       return $$$($URL,$$$)
-    }`) // search node
+    }`,
+  ) // search node
   exportFuns.forEach((exportFun) => {
     const req = exportFun?.getMatch('REQ_TYPE') // get matched variable
     const res = exportFun?.getMatch('RES_TYPE') // get matched variable

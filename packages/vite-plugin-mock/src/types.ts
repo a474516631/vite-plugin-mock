@@ -14,6 +14,7 @@ export interface ViteMockOptions {
   requestPath?: string
   openAIApiKey?: string
   modelName?: string
+  findInterfaceType?: string
 }
 
 export interface RespThisType {
