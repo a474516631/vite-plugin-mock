@@ -84,16 +84,9 @@ export function setReqMockBodyHash(req: IncomingMessage, hash: string) {
   req.headers[MockBodyHashKey] = hash
 }
 
-/** 根据请求body的hash和请求query确定文件名 */
-export function resolveQueryFileName(search: string | null, hash?: string) {
-  return `${hash ? `MBH=${hash}&` : ''}${search ? decodeURIComponent(search) : 'index'}.json`
-}
-
 /** 获取mock数据的path */
-export function getMockPath(pathname: string, target: string, prefix: string, scene?: string) {
-  const { hostname, pathname: pathName } = new URL(target)
-  const proxyTarget = `${hostname}${pathName}`.replaceAll('/', '_')
-  return path.join(zybAbsMockPath, scene ?? 'default', proxyTarget, pathname.replace(prefix, ''))
+export function getMockPath(pathname: string, prefix: string, scene?: string) {
+  return path.join(zybAbsMockPath, scene ?? 'default', pathname.replace(prefix, ''))
 }
 
 export interface RequestParams {

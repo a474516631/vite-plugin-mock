@@ -36,13 +36,10 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
         if (opt.record) {
           Object.keys(proxy).forEach((key) => {
             if (typeof proxy[key] === 'string') {
-              const target = proxy[key]
               proxy[key] = {
-                target: proxy[key],
                 configure: (proxy) =>
                   serverProxyConfig({
                     proxy,
-                    target: target as string,
                     prefix: prefix,
                     queryExclude: ['_'],
                     record: opt?.record,
@@ -59,7 +56,6 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
                   configure: (proxy) =>
                     serverProxyConfig({
                       proxy,
-                      target: target,
                       prefix: prefix,
                       queryExclude: ['_'],
                       record: opt?.record,

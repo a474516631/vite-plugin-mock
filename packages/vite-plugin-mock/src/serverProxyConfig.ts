@@ -1,21 +1,11 @@
 import type { IncomingMessage } from 'node:http'
-import type { MockMethod, Recordable } from './types'
-import fs, { write } from 'node:fs'
+import type { Recordable } from './types'
+import fs from 'node:fs'
 import path from 'node:path'
-import process from 'node:process'
 import zlib from 'node:zlib'
-import { type HttpProxy, loadEnv } from 'vite'
+import { type HttpProxy } from 'vite'
 
-import {
-  createFileWithDir,
-  generateShortHash,
-  getMockPath,
-  getReqMockBodyHash,
-  loggerOutput,
-  resolveQueryFileName,
-  resolveUrlPathnameSearch,
-  setReqMockBodyHash,
-} from './utils'
+import { createFileWithDir, getMockPath, loggerOutput, resolveUrlPathnameSearch } from './utils'
 import { mockTsStrTemplate } from './template'
 
 export interface IUrlsFileData {
@@ -31,12 +21,6 @@ export interface Urls {
   post: string[]
 }
 
-function getUrls(): Array<IUrlsFileData> {
-  const Urls = JSON.parse(
-    fs.readFileSync(path.join(process.cwd(), 'mockServer/urls.json')).toString(),
-  )
-  return Urls
-}
 export interface ResponseReqParams {
   url: string
   body: Recordable
@@ -51,7 +35,7 @@ export interface ServeMockExtra {
   /** 是否开启 录制模式 */
   record?: boolean
   /** target */
-  target: string
+  // target: string
   /** prefix */
   prefix: string
   /** 当前场景 */
@@ -67,68 +51,6 @@ export interface ServeMockExtra {
 enum HTTPMethod {
   GET = 'get',
   POST = 'post',
-}
-
-export function genAllMocks() {
-  const Urls = getUrls()
-  return Urls.flatMap(({ prefix, target, urls, scene, queryExclude }) => {
-    const gets = urls.get.map((url) =>
-      genMock(url, HTTPMethod.GET, target, prefix, scene, queryExclude),
-    )
-    const posts = urls.post.map((url) =>
-      genMock(url, HTTPMethod.POST, target, prefix, scene, queryExclude),
-    )
-    return gets.concat(posts)
-  })
-}
-
-/** mock插件response handler */
-export function mockResHandler(
-  req: ResponseReqParams,
-  target: string,
-  prefix: string,
-  scene?: string,
-  queryExclude?: string[],
-) {
-  const bodyStr = JSON.stringify(req.body)
-  if (req.url) {
-    const { pathname, search } = resolveUrlPathnameSearch(req.url, queryExclude)
-    const dir = getMockPath(pathname!, target, prefix, scene)
-
-    const queryName = resolveQueryFileName(
-      search,
-      bodyStr !== '{}' ? generateShortHash(bodyStr) : undefined,
-    )
-    const filePath = path.join(dir, queryName)
-    // consola.success('🚀 resolve mock path', green(filePath))
-    try {
-      if (fs.existsSync(filePath)) {
-        const result = fs.readFileSync(filePath).toString()
-        return JSON.parse(result).resBody
-      } else {
-        // consola.warn('🚀 resolve mock path not exists', red(filePath))
-      }
-    } catch (error) {
-      console.error(error)
-      return {}
-    }
-  }
-}
-
-/** 构造MockMethod */
-function genMock(
-  url: string,
-  method: HTTPMethod,
-  target: string,
-  prefix: string,
-  scene?: string,
-  queryExclude?: string[],
-): MockMethod {
-  return {
-    url: `${prefix}${url}`,
-    method,
-    response: (req: ResponseReqParams) => mockResHandler(req, target, prefix, scene, queryExclude),
-  }
 }
 
 /**
@@ -155,9 +77,7 @@ class ServerMockProxy {
     this.recordExclude = recordExclude
     this.queryExclude = queryExclude
     this.logger = logger
-    proxy
-      // .on('start', proxyReq => this.onProxyStartHandler(proxyReq))
-      .on('proxyRes', (proxyRes, req) => this.onProxyResHandler(proxyRes, req))
+    proxy.on('proxyRes', (proxyRes, req) => this.onProxyResHandler(proxyRes, req))
   }
 
   /** 处理代理指定环境的接口响应数据并写入本地mock文件 */
@@ -213,8 +133,8 @@ class ServerMockProxy {
   writeMockData(req: IncomingMessage, body: string) {
     const url = req.url!
 
-    const { pathname, search } = resolveUrlPathnameSearch(url, this.queryExclude)
-    const mockPath = getMockPath(pathname!, this.target, this.prefix, this.scene)
+    const { pathname } = resolveUrlPathnameSearch(url, this.queryExclude)
+    const mockPath = getMockPath(pathname!, this.prefix, this.scene)
     if (this.recordExclude) {
       const recordExclude: string[] =
         typeof this.recordExclude === 'string' ? [this.recordExclude] : this.recordExclude
