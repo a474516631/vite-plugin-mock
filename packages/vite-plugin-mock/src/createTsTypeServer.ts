@@ -52,7 +52,7 @@ function createWatch(opt: ViteMockOptions, config: ResolvedConfig) {
   })
 
   watcher.on('all', async (event, file) => {
-    logger && loggerOutput(`mock file ${event}`, file)
+    logger && loggerOutput(`request file ${event}`, file)
     requestTsData = await getTsType(opt, config)
   })
 }

@@ -20,6 +20,10 @@ import ModuleTreeNode from './ModuleTreeNode.vue'
   </div>
 </template>
 <style>
+:root{
+  --cm-ttc-c-thumb: #eee;
+  --cm-ttc-c-track: white;
+}
 .scrolls::-webkit-scrollbar {
   width: 8px;
   height: 8px;

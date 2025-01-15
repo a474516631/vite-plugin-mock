@@ -8,17 +8,11 @@ import fg from 'fast-glob'
 
 import Mock from 'mockjs'
 import { pathToRegexp, match } from 'path-to-regexp'
-import {
-  isArray,
-  isFunction,
-  sleep,
-  isRegExp,
-  isAbsPath,
-  createFileWithDir,
-  loggerOutput,
-} from './utils'
+import { isArray, isFunction, sleep, isRegExp, isAbsPath, loggerOutput } from './utils'
 import { IncomingMessage, NextHandleFunction } from 'connect'
-import { bundleRequire, GetOutputFile, JS_EXT_RE } from 'bundle-require'
+// import { bundleRequire, GetOutputFile, JS_EXT_RE } from 'bundle-require'
+
+import { bundleImport } from 'bundle-import'
 import type { ResolvedConfig } from 'vite'
 
 export let mockData: MockMethod[] = []
@@ -241,24 +235,24 @@ async function getMockConfig(opt: ViteMockOptions, config: ResolvedConfig) {
 
 // fixed file generation format
 // use a random path to avoid import cache
-const getOutputFile: GetOutputFile = (filepath, format) => {
-  const dirname = path.dirname(filepath)
-  const basename = path.basename(filepath)
-  const randomname = `${Date.now()}_${Math.random().toString(36).substring(2, 15)}`
-  return path.resolve(
-    dirname,
-    `_${basename.replace(JS_EXT_RE, `.bundled_${randomname}.${format === 'esm' ? 'mjs' : 'cjs'}`)}`,
-  )
-}
+// const getOutputFile: GetOutputFile = (filepath, format) => {
+//   const dirname = path.dirname(filepath)
+//   const basename = path.basename(filepath)
+//   const randomname = `${Date.now()}_${Math.random().toString(36).substring(2, 15)}`
+//   return path.resolve(
+//     dirname,
+//     `_${basename.replace(JS_EXT_RE, `.bundled_${randomname}.${format === 'esm' ? 'mjs' : 'cjs'}`)}`,
+//   )
+// }
 
 // Inspired by vite
 // support mock .ts files
 async function resolveModule(p: string, config: ResolvedConfig): Promise<any> {
-  const mockData = await bundleRequire({
+  const mockData = await bundleImport({
     filepath: p,
-    getOutputFile,
+    // getOutputFile,
   })
-
+  console.log(mockData)
   let mod = mockData.mod.default || mockData.mod
   if (isFunction(mod)) {
     mod = await mod({ env: config.env, mode: config.mode, command: config.command })
