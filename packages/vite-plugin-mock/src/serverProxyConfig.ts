@@ -63,15 +63,13 @@ export function serverProxyConfig(params: ServeMockExtra) {
 }
 
 class ServerMockProxy {
-  target: string
   prefix: string
   scene?: string = ''
   recordExclude?: string | string[]
   queryExclude?: string[]
   logger?: boolean = true
   constructor(params: ServeMockExtra) {
-    const { proxy, target, prefix, scene, recordExclude, queryExclude, logger } = params
-    this.target = target
+    const { proxy, prefix, scene, recordExclude, queryExclude, logger } = params
     this.prefix = prefix
     this.scene = scene ?? ''
     this.recordExclude = recordExclude

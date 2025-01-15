@@ -15,6 +15,8 @@ export interface ViteMockOptions {
   openAIApiKey?: string
   modelName?: string
   findInterfaceType?: string
+  // 场景
+  scene?: string
 }
 
 export interface RespThisType {

@@ -86,7 +86,7 @@ export function setReqMockBodyHash(req: IncomingMessage, hash: string) {
 
 /** 获取mock数据的path */
 export function getMockPath(pathname: string, prefix: string, scene?: string) {
-  return path.join(zybAbsMockPath, scene ?? 'default', pathname.replace(prefix, ''))
+  return path.join(zybAbsMockPath, scene ?? '', pathname.replace(prefix, ''))
 }
 
 export interface RequestParams {
