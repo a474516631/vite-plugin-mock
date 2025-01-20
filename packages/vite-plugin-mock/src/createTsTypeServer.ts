@@ -106,39 +106,47 @@ function extractRequestInfo(filePath: string, opt: ViteMockOptions): Recordable 
   const map: Recordable = {}
   const ast = parse(Lang.TypeScript, fileContent)
   const root = ast.root() // root is an instance of SgNode
-
-  const exportFuns = root.findAll(
-    opt.findInterfaceType ??
-      `export function $NAME($$$:$REQ_TYPE):Promise<$RES_TYPE> {
-      return $$$($URL,$$$)
-    }`,
-  ) // search node
-  exportFuns.forEach((exportFun) => {
-    const req = exportFun?.getMatch('REQ_TYPE') // get matched variable
-    const res = exportFun?.getMatch('RES_TYPE') // get matched variable
-    let url = exportFun?.getMatch('URL')?.text() // get matched variable
-    if (!url) {
-      return
-    }
-    url = `${opt.prefix || ''}${likeStrToStr(url)}`
-
-    const typeObj: Recordable = {}
-    if (req) {
-      // console.log(req?.text())
-      const reqFindStr = `interface ${req?.text()} {$$$}`
-      const reqType = root.find(reqFindStr)
-      if (reqType) {
-        typeObj.reqType = reqType?.text()
+  try {
+    const exportFuns = root.findAll(
+      opt.findInterfaceType ??
+        `export function $NAME($$$:$REQ_TYPE):Promise<$RES_TYPE> {
+        return $$$($URL,$$$)
+      }`,
+    ) // search node
+    exportFuns.forEach((exportFun) => {
+      const req = exportFun?.getMatch('REQ_TYPE') // get matched variable
+      const res = exportFun?.getMatch('RES_TYPE') // get matched variable
+      let url = exportFun?.getMatch('URL')?.text() // get matched variable
+      if (!url) {
+        return
       }
-    }
-    if (res) {
-      const resFindStr = `interface ${res?.text()} {$$$}`
-      const resType = root.find(resFindStr)
-      if (resType) {
-        typeObj.resType = resType?.text()
+      url = `${opt.prefix || ''}${likeStrToStr(url)}`
+
+      const typeObj: Recordable = {}
+      if (req && req?.kind() === 'type_identifier') {
+        // console.log(req?.text())
+        const reqFindStr = `interface ${req?.text()} {$$$}`
+        const reqType = root.find(reqFindStr)
+        if (reqType) {
+          typeObj.reqType = reqType?.text()
+        }
+      } else if (req && req?.kind() === 'object_type') {
+        typeObj.reqType = req?.text()
       }
-    }
-    map[url] = typeObj
-  })
+      if (res && res?.kind() === 'type_identifier') {
+        const resFindStr = `interface ${res?.text()} {$$$}`
+        const resType = root.find(resFindStr)
+        if (resType) {
+          typeObj.resType = resType?.text()
+        }
+      } else if (res && res?.kind() === 'object_type') {
+        typeObj.resType = res?.text()
+      }
+      map[url] = typeObj
+    })
+  } catch (error) {
+    console.log(error)
+  }
+
   return map
 }
