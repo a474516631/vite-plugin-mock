@@ -1,0 +1,13 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "assistantUid": "4254802674",
+    "assistantPhone": "15611756811",
+    "personUid": 3000039349,
+    "personPhone": "17607670958",
+    "uname": "蒋东凡",
+    "kpAscription": 1,
+    "kpToOld": 0
+  }
+}

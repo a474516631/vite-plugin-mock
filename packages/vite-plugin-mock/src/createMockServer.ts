@@ -265,7 +265,7 @@ function getPath(opt: ViteMockOptions) {
   const cwd = process.cwd()
   const absMockPath = isAbsPath(mockPath)
     ? mockPath!
-    : path.join(cwd, opt.scene ?? '', mockPath || '')
+    : path.join(cwd, mockPath || '', opt.scene ?? '')
   const absConfigPath = path.join(cwd, configPath || '')
   return {
     absMockPath,

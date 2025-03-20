@@ -1,0 +1,380 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "list": [
+      {
+        "folderId": 73324,
+        "folderName": "辅导消息组2期",
+        "messageGroups": [
+          {
+            "groupId": 150706,
+            "groupName": "1000字",
+            "authority": 0,
+            "desc": ""
+          },
+          {
+            "groupId": 148922,
+            "groupName": "全类型1",
+            "authority": 0,
+            "desc": ""
+          }
+        ],
+        "order": 16
+      },
+      {
+        "folderId": 71845,
+        "folderName": "消息组2期",
+        "messageGroups": [
+          {
+            "groupId": 171266,
+            "groupName": "15秒",
+            "authority": 0,
+            "desc": ""
+          },
+          {
+            "groupId": 144918,
+            "groupName": "等于20M",
+            "authority": 0,
+            "desc": ""
+          },
+          {
+            "groupId": 144917,
+            "groupName": "5秒素材",
+            "authority": 0,
+            "desc": ""
+          },
+          {
+            "groupId": 144816,
+            "groupName": "6秒",
+            "authority": 0,
+            "desc": "5秒"
+          },
+          {
+            "groupId": 144815,
+            "groupName": "30秒",
+            "authority": 0,
+            "desc": "50秒"
+          },
+          {
+            "groupId": 144006,
+            "groupName": "全素材无变量",
+            "authority": 0,
+            "desc": "全素材-无变量"
+          },
+          {
+            "groupId": 143963,
+            "groupName": "全素材",
+            "authority": 0,
+            "desc": "ddd"
+          }
+        ],
+        "order": 15
+      },
+      {
+        "folderId": 30974,
+        "folderName": "AI催到课话术消息",
+        "messageGroups": [
+          {
+            "groupId": 53914,
+            "groupName": "回复请假",
+            "authority": 0,
+            "desc": "回复请假"
+          },
+          {
+            "groupId": 53904,
+            "groupName": "回复回放时间",
+            "authority": 0,
+            "desc": "回复回放时间"
+          },
+          {
+            "groupId": 53894,
+            "groupName": "回复伴学标记",
+            "authority": 0,
+            "desc": "回复伴学标记"
+          },
+          {
+            "groupId": 53454,
+            "groupName": "回复能到标记",
+            "authority": 0,
+            "desc": "回复能到标记"
+          }
+        ],
+        "order": 14
+      },
+      {
+        "folderId": 26184,
+        "folderName": "QA团队共享CS",
+        "messageGroups": [
+          {
+            "groupId": 44384,
+            "groupName": "文本",
+            "authority": 0,
+            "desc": "文本"
+          }
+        ],
+        "order": 13
+      },
+      {
+        "folderId": 17730,
+        "folderName": "QA视频号共享",
+        "messageGroups": [
+          {
+            "groupId": 44378,
+            "groupName": "文乐发视频",
+            "authority": 0,
+            "desc": "文乐-发视频"
+          },
+          {
+            "groupId": 30007,
+            "groupName": "QA视频号共享",
+            "authority": 0,
+            "desc": "QA视频号共享"
+          }
+        ],
+        "order": 12
+      },
+      {
+        "folderId": 19,
+        "folderName": "1期老消息组数据勿删",
+        "messageGroups": [
+          {
+            "groupId": 4329,
+            "groupName": "123",
+            "authority": 0,
+            "desc": "123"
+          },
+          {
+            "groupId": 4323,
+            "groupName": "12222",
+            "authority": 0,
+            "desc": "33333"
+          },
+          {
+            "groupId": 3546,
+            "groupName": "文本问题回归",
+            "authority": 0,
+            "desc": "文本问题回归文本问题回归文本问题回归"
+          },
+          {
+            "groupId": 614,
+            "groupName": "个人文本素材无变量",
+            "authority": 0,
+            "desc": "个人文本素材无变量"
+          }
+        ],
+        "order": 11
+      },
+      {
+        "folderId": 37,
+        "folderName": "测试用勿删有BUG",
+        "messageGroups": [
+          {
+            "groupId": 82,
+            "groupName": "0422团队共享TIPS2次回归",
+            "authority": 0,
+            "desc": "0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享TIPS2次回归0422团队共享"
+          },
+          {
+            "groupId": 81,
+            "groupName": "0422第2次TIPS回归",
+            "authority": 0,
+            "desc": "0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第2次TIPS回归0422第"
+          }
+        ],
+        "order": 10
+      },
+      {
+        "folderId": 2340,
+        "folderName": "zjftest",
+        "messageGroups": [
+          {
+            "groupId": 4272,
+            "groupName": "card",
+            "authority": 0,
+            "desc": "card"
+          },
+          {
+            "groupId": 4246,
+            "groupName": "zjftest",
+            "authority": 0,
+            "desc": "zjftest"
+          }
+        ],
+        "order": 9
+      },
+      {
+        "folderId": 11,
+        "folderName": "5号消息组文件夹",
+        "messageGroups": [
+          {
+            "groupId": 97,
+            "groupName": "即时录制",
+            "authority": 0,
+            "desc": "即时录制"
+          },
+          {
+            "groupId": 89,
+            "groupName": "上传语音微信剪映同时录制",
+            "authority": 0,
+            "desc": "上传语音微信剪映同时录制"
+          }
+        ],
+        "order": 8
+      },
+      {
+        "folderId": 2343,
+        "folderName": "SOP15期测试文本素材",
+        "messageGroups": [
+          {
+            "groupId": 4256,
+            "groupName": "QA测试文本素材团队无变量",
+            "authority": 0,
+            "desc": "QA测试文本素材团队无变量"
+          },
+          {
+            "groupId": 4254,
+            "groupName": "QA测试文本素材团队有变量",
+            "authority": 0,
+            "desc": "QA测试文本素材团队有变量"
+          },
+          {
+            "groupId": 4252,
+            "groupName": "QA测试文本素材个人有变量",
+            "authority": 0,
+            "desc": "QA测试文本素材个人有变量"
+          },
+          {
+            "groupId": 4251,
+            "groupName": "QA测试文本素材个人无变量",
+            "authority": 0,
+            "desc": "QA测试文本素材个人无变量"
+          }
+        ],
+        "order": 7
+      },
+      {
+        "folderId": 2339,
+        "folderName": "SOP15期测试图片素材",
+        "messageGroups": [
+          {
+            "groupId": 4247,
+            "groupName": "QA测试图片素材团队",
+            "authority": 0,
+            "desc": "QA测试图片素材团队"
+          },
+          {
+            "groupId": 4245,
+            "groupName": "QA测试图片素材个人",
+            "authority": 0,
+            "desc": "QA测试图片素材个人"
+          }
+        ],
+        "order": 6
+      },
+      {
+        "folderId": 2344,
+        "folderName": "SOP15期测试音频素材",
+        "messageGroups": [
+          {
+            "groupId": 4332,
+            "groupName": "音频文件团队",
+            "authority": 0,
+            "desc": "音频文件团队"
+          },
+          {
+            "groupId": 4331,
+            "groupName": "音频文件个人",
+            "authority": 0,
+            "desc": "音频文件个人"
+          }
+        ],
+        "order": 5
+      },
+      {
+        "folderId": 2347,
+        "folderName": "SOP15期测试文件素材",
+        "messageGroups": [
+          {
+            "groupId": 4334,
+            "groupName": "文件消息组团队",
+            "authority": 0,
+            "desc": "文件消息组团队"
+          },
+          {
+            "groupId": 4333,
+            "groupName": "文件消息组个人",
+            "authority": 0,
+            "desc": "文件消息组个人"
+          }
+        ],
+        "order": 4
+      },
+      {
+        "folderId": 2348,
+        "folderName": "SOP15期测试卡连接素材",
+        "messageGroups": [
+          {
+            "groupId": 4340,
+            "groupName": "卡片链接团队说明有变量",
+            "authority": 0,
+            "desc": "卡片链接团队说明有变量"
+          },
+          {
+            "groupId": 4339,
+            "groupName": "卡片链接团队标题有变量",
+            "authority": 0,
+            "desc": "卡片链接团队标题有变量"
+          },
+          {
+            "groupId": 4338,
+            "groupName": "卡片链接团队无变量",
+            "authority": 0,
+            "desc": "卡片链接团队无变量"
+          },
+          {
+            "groupId": 4337,
+            "groupName": "卡片链接个人说明有变量",
+            "authority": 0,
+            "desc": "卡片链接个人说明有变量"
+          },
+          {
+            "groupId": 4336,
+            "groupName": "卡片链接个人标题有变量",
+            "authority": 0,
+            "desc": "卡片链接个人标题有变量"
+          },
+          {
+            "groupId": 4335,
+            "groupName": "卡片链接个人无变量",
+            "authority": 0,
+            "desc": "卡片链接个人无变量"
+          }
+        ],
+        "order": 3
+      },
+      {
+        "folderId": 2349,
+        "folderName": "SOP15期测试视频号素材",
+        "messageGroups": null,
+        "order": 2
+      },
+      {
+        "folderId": 2367,
+        "folderName": "SOP15测试完整素材",
+        "messageGroups": [
+          {
+            "groupId": 4283,
+            "groupName": "完整素材不含变量",
+            "authority": 0,
+            "desc": "完整素材不含变量"
+          }
+        ],
+        "order": 1
+      }
+    ],
+    "pn": 0,
+    "rn": 1000,
+    "total": 16
+  }
+}

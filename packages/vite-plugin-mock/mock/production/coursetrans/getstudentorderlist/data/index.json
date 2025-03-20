@@ -1,0 +1,823 @@
+{
+  "errNo": 0,
+  "errstr": "success",
+  "data": {
+    "meta": {
+      "pn": 0,
+      "rn": 20,
+      "total": 18
+    },
+    "list": [
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3543797910,
+        "orderTime": 1737013846,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4812092240,
+            "skuId": 27507977,
+            "skuName": "【2000人】任务列表性能优化",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 3206475,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3206475,
+              "courseName": "【2000人】任务列表性能优化",
+              "onlineFormatTimeAll": "2月2日-3月2日 每周日 08:00-08:05 共5次课",
+              "lessonCnt": 5,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 2672443049,
+                  "teacherName": "qa_test_zj_5610"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3347396490,
+        "orderTime": 1734088683,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4618808840,
+            "skuId": 27260422,
+            "skuName": "班课_小学数学QA",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "数学",
+            "productType": 1,
+            "productId": 3164523,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3164523,
+              "courseName": "班课_小学数学QA",
+              "onlineFormatTimeAll": "12月16日-12月26日 周一/二/四/五 10:15-10:45 18:00-18:40 20:35-23:00 20:00-20:25 共5次课",
+              "lessonCnt": 5,
+              "subjectId": 2,
+              "subjectName": "数学",
+              "teacherList": [
+                {
+                  "teacherUid": 2673598425,
+                  "teacherName": "qa_test_zj_5900"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3282685196,
+        "orderTime": 1733226624,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4537679496,
+            "skuId": 27200067,
+            "skuName": "100人",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "英语",
+            "productType": 1,
+            "productId": 3150472,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3150472,
+              "courseName": "100人",
+              "onlineFormatTimeAll": "3月21日-3月22日 周五/六 20:14-21:14 共2次课",
+              "lessonCnt": 2,
+              "subjectId": 3,
+              "subjectName": "英语",
+              "teacherList": [
+                {
+                  "teacherUid": 2578878638,
+                  "teacherName": "qa_test_zj_794"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3200278388,
+        "orderTime": 1731752760,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4440151710,
+            "skuId": 26007478,
+            "skuName": "2024_秋_初三_LPC课程B",
+            "category": 6,
+            "categoryName": "未知",
+            "shopId": 4,
+            "tagName": "讲座",
+            "productType": 1,
+            "productId": 3125822,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3125822,
+              "courseName": "2024_秋_初三_LPC课程B",
+              "onlineFormatTimeAll": "2024年11月16日-2025年1月15日 周一/二/三/四/五/六/日 19:30-21:00 10:00-21:00 16:45-21:00 20:32-22:00 11:50-21:00 22:30-23:00 10:50-21:00 12:00-21:00 11:00-11:10 17:30-21:00 共16次课",
+              "lessonCnt": 16,
+              "subjectId": 12,
+              "subjectName": "讲座",
+              "teacherList": [
+                {
+                  "teacherUid": 2674037774,
+                  "teacherName": "qa_test_zj_5612"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3199055810,
+        "orderTime": 1731731185,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4439273335,
+            "skuId": 25600693,
+            "skuName": "小英16:9有组站播不露脸_B",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "英语",
+            "productType": 1,
+            "productId": 3123757,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3123757,
+              "courseName": "小英16:9有组站播不露脸_B",
+              "onlineFormatTimeAll": "11月16日-11月23日 周一/二/三/四/五/六/日 13:45-21:30 10:30-21:30 共8次课",
+              "lessonCnt": 8,
+              "subjectId": 3,
+              "subjectName": "英语",
+              "teacherList": [
+                {
+                  "teacherUid": 2672790519,
+                  "teacherName": "qa_test_zj_5609"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3199289070,
+        "orderTime": 1731729873,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4439996176,
+            "skuId": 25360778,
+            "skuName": "2024_秋_初中_物理_4:3无组B",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "物理",
+            "productType": 1,
+            "productId": 3123658,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3123658,
+              "courseName": "2024_秋_初中_物理_4:3无组B",
+              "onlineFormatTimeAll": "11月16日-12月23日 周一/二/三/四/五/六/日 13:35-21:30 10:30-21:30 19:15-22:30 共9次课",
+              "lessonCnt": 9,
+              "subjectId": 4,
+              "subjectName": "物理",
+              "teacherList": [
+                {
+                  "teacherUid": 2672443049,
+                  "teacherName": "qa_test_zj_5610"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3199171044,
+        "orderTime": 1731727644,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4440375914,
+            "skuId": 25300573,
+            "skuName": "2024_秋_小学_英语_16:9有组坐播露脸_B",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "英语",
+            "productType": 1,
+            "productId": 3123613,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3123613,
+              "courseName": "2024_秋_小学_英语_16:9有组坐播露脸_B",
+              "onlineFormatTimeAll": "11月16日-12月3日 周一/二/三/四/五/六/日 13:35-21:30 10:30-21:30 22:30-23:00 10:30-11:30 16:35-21:30 14:52-21:30 16:20-21:30 共13次课",
+              "lessonCnt": 13,
+              "subjectId": 3,
+              "subjectName": "英语",
+              "teacherList": [
+                {
+                  "teacherUid": 2673060868,
+                  "teacherName": "qa_test_zj_5611"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3131419020,
+        "orderTime": 1730442778,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4396521394,
+            "skuId": 25597262,
+            "skuName": "(arklist)任务列表性能优化_辅导",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "数学",
+            "productType": 1,
+            "productId": 3094187,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3094187,
+              "courseName": "(arklist)任务列表性能优化_辅导",
+              "onlineFormatTimeAll": "11月4日-12月16日 每周一 10:00-10:30 共7次课",
+              "lessonCnt": 7,
+              "subjectId": 2,
+              "subjectName": "数学",
+              "teacherList": [
+                {
+                  "teacherUid": 2673277574,
+                  "teacherName": "qa_test_zj_5410"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2699230452,
+        "orderTime": 1730282225,
+        "shopId": 119,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 2601,
+        "list": [
+          {
+            "subTradeId": 4007048992,
+            "skuId": 24620265,
+            "skuName": "小班课001",
+            "category": 200068,
+            "categoryName": "未知",
+            "shopId": 119,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 3092799,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3092799,
+              "courseName": "小班课001",
+              "onlineFormatTimeAll": "10月30日 19:35-19:40",
+              "lessonCnt": 1,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 4311035670,
+                  "teacherName": "卫东老师_辅导"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3101202432,
+        "orderTime": 1730272264,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4349294739,
+            "skuId": 24680275,
+            "skuName": "新方舟回归2",
+            "category": 6,
+            "categoryName": "未知",
+            "shopId": 4,
+            "tagName": "数学",
+            "productType": 1,
+            "productId": 3092540,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3092540,
+              "courseName": "新方舟回归2",
+              "onlineFormatTimeAll": "10月31日-11月5日 周一/二/四/五 10:00-12:00 共4次课",
+              "lessonCnt": 4,
+              "subjectId": 2,
+              "subjectName": "数学",
+              "teacherList": [
+                {
+                  "teacherUid": 2672443049,
+                  "teacherName": "qa_test_zj_5610"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 3085994496,
+        "orderTime": 1730114206,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4328005523,
+            "skuId": 25476322,
+            "skuName": "班课_企微规则",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "数学",
+            "productType": 1,
+            "productId": 3091225,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 3091225,
+              "courseName": "班课_企微规则",
+              "onlineFormatTimeAll": "10月28日-10月31日 周一/二/三/四 21:00-21:30 共4次课",
+              "lessonCnt": 4,
+              "subjectId": 2,
+              "subjectName": "数学",
+              "teacherList": [
+                {
+                  "teacherUid": 2672929141,
+                  "teacherName": "qa_test_zj_5800"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2764255788,
+        "orderTime": 1722570432,
+        "shopId": 119,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 2601,
+        "list": [
+          {
+            "subTradeId": 4042942520,
+            "skuId": 25342749,
+            "skuName": "小灶课_2981567_01",
+            "category": 200068,
+            "categoryName": "未知",
+            "shopId": 119,
+            "tagName": "数学",
+            "productType": 1,
+            "productId": 2992871,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2992871,
+              "courseName": "小灶课_2981567_01",
+              "onlineFormatTimeAll": "8月2日-8月3日 周五/六 15:20-15:30 共2次课",
+              "lessonCnt": 2,
+              "subjectId": 2,
+              "subjectName": "数学",
+              "teacherList": [
+                {
+                  "teacherUid": 4268503072,
+                  "teacherName": "田田老师(辅导)"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2745064010,
+        "orderTime": 1721789666,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4033322815,
+            "skuId": 25461059,
+            "skuName": "班课_test1qa02",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 2981567,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2981567,
+              "courseName": "班课_test1qa02",
+              "onlineFormatTimeAll": "7月24日 16:00-16:40",
+              "lessonCnt": 1,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 2673598425,
+                  "teacherName": "qa_test_zj_5900"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2699211768,
+        "orderTime": 1721465354,
+        "shopId": 119,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 2601,
+        "list": [
+          {
+            "subTradeId": 4007040520,
+            "skuId": 25280667,
+            "skuName": "单章节I",
+            "category": 200068,
+            "categoryName": "未知",
+            "shopId": 119,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 2978738,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2978738,
+              "courseName": "单章节I",
+              "onlineFormatTimeAll": "7月29日 16:45-16:50",
+              "lessonCnt": 1,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 4268503072,
+                  "teacherName": "田田老师(辅导)"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2738168380,
+        "orderTime": 1721443887,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4029637961,
+            "skuId": 25400601,
+            "skuName": "班课_tips回归验证qa_0720专用",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 2978417,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2978417,
+              "courseName": "班课_tips回归验证qa_0720专用",
+              "onlineFormatTimeAll": "7月20日-8月19日 周一/六/日 17:00-18:00 22:40-23:20 共4次课",
+              "lessonCnt": 4,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 2673598425,
+                  "teacherName": "qa_test_zj_5900"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2714762308,
+        "orderTime": 1720609626,
+        "shopId": 101,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 4012895216,
+            "skuId": 23911318,
+            "skuName": "【任务列表升级】小鹿编程体验课(进校)_产运TEST",
+            "category": 1000024,
+            "categoryName": "未知",
+            "shopId": 101,
+            "tagName": "Python编程",
+            "productType": 1,
+            "productId": 2967873,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2967873,
+              "courseName": "【任务列表升级】小鹿编程体验课(进校)_产运TEST",
+              "onlineFormatTimeAll": "7月10日-7月16日 周一/二/三/四/五/六 20:00-20:00 09:00-09:59 10:00-11:00 19:00-20:00 13:00-15:00 08:00-09:00 共8次课",
+              "lessonCnt": 8,
+              "subjectId": 41,
+              "subjectName": "Python编程",
+              "teacherList": [
+                {
+                  "teacherUid": 2673458253,
+                  "teacherName": "qa_test_zj_5608"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2610072542,
+        "orderTime": 1718368705,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 3894507143,
+            "skuId": 23549243,
+            "skuName": "班课_验证物料yw0614",
+            "category": 2,
+            "categoryName": "班课",
+            "shopId": 4,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 2937561,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2937561,
+              "courseName": "班课_验证物料yw0614",
+              "onlineFormatTimeAll": "6月14日-6月15日 周五/六 21:15-21:20 共2次课",
+              "lessonCnt": 2,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 2673598425,
+                  "teacherName": "qa_test_zj_5900"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      },
+      {
+        "oriPrice": 0,
+        "diffPrice": 0,
+        "price": 0,
+        "tradeId": 2551566864,
+        "orderTime": 1717404121,
+        "shopId": 4,
+        "payStatus": 0,
+        "tabStatus": 4,
+        "status": 5,
+        "saleChannelId": 99,
+        "list": [
+          {
+            "subTradeId": 3823082664,
+            "skuId": 22471714,
+            "skuName": "QA测试大批量学生",
+            "category": 6,
+            "categoryName": "未知",
+            "shopId": 4,
+            "tagName": "语文",
+            "productType": 1,
+            "productId": 2925829,
+            "changeOrderType": 0,
+            "status": 0,
+            "quantity": 1,
+            "sellTotal": 0,
+            "payTotal": 0,
+            "courseInfo": {
+              "courseId": 2925829,
+              "courseName": "QA测试大批量学生",
+              "onlineFormatTimeAll": "6月3日-6月11日 周一/二/日 17:46-18:46 16:26-17:26 共4次课",
+              "lessonCnt": 4,
+              "subjectId": 1,
+              "subjectName": "语文",
+              "teacherList": [
+                {
+                  "teacherUid": 2673458253,
+                  "teacherName": "qa_test_zj_5608"
+                }
+              ]
+            },
+            "payStatus": 3
+          }
+        ]
+      }
+    ]
+  }
+}

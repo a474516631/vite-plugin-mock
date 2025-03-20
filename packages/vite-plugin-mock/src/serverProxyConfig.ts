@@ -12,7 +12,6 @@ export interface IUrlsFileData {
   target: string
   prefix: string
   urls: Urls
-  scene: string
   queryExclude: string[]
 }
 
@@ -38,8 +37,7 @@ export interface ServeMockExtra {
   // target: string
   /** prefix */
   prefix: string
-  /** 当前场景 */
-  scene?: string
+
   /** 录制排除 */
   recordExclude?: string | string[]
   /** query参数排除 */
@@ -58,20 +56,17 @@ enum HTTPMethod {
  * VITE_MOCK_MODE 为 RECORD 时替换vite中的server/proxy/configure
  */
 export function serverProxyConfig(params: ServeMockExtra) {
-  // const { target, prefix, scene, recordExclude, queryExclude } = params
   return new ServerMockProxy({ ...params })
 }
 
 class ServerMockProxy {
   prefix: string
-  scene?: string = ''
   recordExclude?: string | string[]
   queryExclude?: string[]
   logger?: boolean = true
   constructor(params: ServeMockExtra) {
-    const { proxy, prefix, scene, recordExclude, queryExclude, logger } = params
+    const { proxy, prefix, recordExclude, queryExclude, logger } = params
     this.prefix = prefix
-    this.scene = scene ?? ''
     this.recordExclude = recordExclude
     this.queryExclude = queryExclude
     this.logger = logger
@@ -132,7 +127,7 @@ class ServerMockProxy {
     const url = req.url!
 
     const { pathname } = resolveUrlPathnameSearch(url, this.queryExclude)
-    const mockPath = getMockPath(pathname!, this.prefix, this.scene)
+    const mockPath = getMockPath(pathname!, this.prefix)
     if (this.recordExclude) {
       const recordExclude: string[] =
         typeof this.recordExclude === 'string' ? [this.recordExclude] : this.recordExclude

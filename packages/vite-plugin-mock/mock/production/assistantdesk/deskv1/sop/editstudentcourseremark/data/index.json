@@ -1,0 +1,12 @@
+{
+  "errNo": 300003,
+  "errStr": "没有权限 -- 当前业务账号不能操作该学生",
+  "data": {
+    "classId": 12758242,
+    "studentUid": 2633307145,
+    "courseId": 3123757,
+    "remark": "connect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-recordconnect-re",
+    "assistantUid": 2755742970,
+    "personUid": 3000039349
+  }
+}

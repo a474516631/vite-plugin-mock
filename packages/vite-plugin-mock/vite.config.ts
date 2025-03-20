@@ -22,6 +22,9 @@ export default defineConfig(({ command }) => ({
       logger: true,
       record: true,
       requestPath: './client/request',
+      openAIApiKey: 'zyb-00c0f94aaf2fc96765e16e29aeede775@zbk_edu_aigc',
+      modelName: 'gpt-3.5-turbo-1106',
+      scene: 'production',
     }),
     Components({
       resolvers: [IconsResolver()],

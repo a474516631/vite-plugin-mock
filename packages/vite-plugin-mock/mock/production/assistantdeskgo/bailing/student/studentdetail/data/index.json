@@ -1,0 +1,44 @@
+{
+  "errNo": 0,
+  "errMsg": "succ",
+  "data": {
+    "studentUid": 2633307145,
+    "encryptedStudentUid": "d6faa2f0f9515fa610a2f2325e0bf90a",
+    "studentName": "大栗同学ZX762",
+    "namePinyin": [
+      {
+        "chinese": "大",
+        "pinyin": "dà"
+      },
+      {
+        "chinese": "栗",
+        "pinyin": "lì"
+      },
+      {
+        "chinese": "同",
+        "pinyin": "tóng"
+      },
+      {
+        "chinese": "学",
+        "pinyin": "xué"
+      },
+      {
+        "chinese": "ZX762",
+        "pinyin": ""
+      }
+    ],
+    "nickname": "大栗同学ZX762",
+    "sex": 0,
+    "grade": "",
+    "school": "",
+    "phone": "116****6649",
+    "area": "",
+    "assistantUid": 4254802674,
+    "assistantPhone": "156****6811",
+    "belongObj": {
+      "belongVal": 9,
+      "belongStr": "外婆"
+    },
+    "deviceInfo": "设备：华为 Nova 11\nAPP：作业帮直播课\n用户 ID：2633307145\ncuid：20112E53F7700BA5538649933A0FB16A|0\n时间：2024-12-19 15:03:55\n"
+  }
+}

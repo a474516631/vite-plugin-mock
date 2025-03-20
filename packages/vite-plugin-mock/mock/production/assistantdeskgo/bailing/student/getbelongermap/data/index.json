@@ -1,0 +1,48 @@
+{
+  "errNo": 0,
+  "errMsg": "succ",
+  "data": {
+    "list": [
+      {
+        "label": "本人",
+        "value": 1
+      },
+      {
+        "label": "妈妈",
+        "value": 2
+      },
+      {
+        "label": "爸爸",
+        "value": 3
+      },
+      {
+        "label": "爷爷",
+        "value": 4
+      },
+      {
+        "label": "奶奶",
+        "value": 5
+      },
+      {
+        "label": "哥哥",
+        "value": 6
+      },
+      {
+        "label": "姐姐",
+        "value": 7
+      },
+      {
+        "label": "外公",
+        "value": 8
+      },
+      {
+        "label": "外婆",
+        "value": 9
+      },
+      {
+        "label": "其他",
+        "value": 10
+      }
+    ]
+  }
+}

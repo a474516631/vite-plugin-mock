@@ -1,0 +1,196 @@
+{
+  "errNo": 0,
+  "errMsg": "succ",
+  "data": {
+    "list": [
+      {
+        "id": 45004872,
+        "startTime": 1734596782,
+        "type": 1,
+        "interviewType": 2,
+        "status": 4,
+        "result": 2,
+        "studentUid": 2633307145,
+        "courseId": 0,
+        "topic": null,
+        "remindId": 26462,
+        "personUid": 3000039349,
+        "duration": 85000,
+        "callAssistantUid": 4254802674,
+        "callAssistantName": "南山老师-辅导(新)",
+        "subject": "",
+        "abstractInfo": {
+          "content": "",
+          "todo": {
+            "remindId": 26462,
+            "currentRemindId": "26462_99991231235959",
+            "createUid": 3000039349,
+            "content": "发送学习报告",
+            "type": 1,
+            "remindTime": "2024-12-20 10:00:00",
+            "posRemindTime": "",
+            "fromType": 1,
+            "students": [],
+            "status": 0
+          },
+          "tags": [
+            {
+              "tagkey": "不能到课原因",
+              "taginfo": "在外面无设备",
+              "tagvalue": "在外面无设备",
+              "hideflag": "0"
+            }
+          ],
+          "topic": null
+        }
+      },
+      {
+        "id": 45001724,
+        "startTime": 1734595628,
+        "type": 3,
+        "interviewType": 2,
+        "status": 1,
+        "result": 1,
+        "studentUid": 2633307145,
+        "courseId": 0,
+        "topic": null,
+        "remindId": 26310,
+        "personUid": 3000039349,
+        "duration": 72000,
+        "callAssistantUid": 4254802674,
+        "callAssistantName": "南山老师-辅导(新)",
+        "subject": "",
+        "abstractInfo": {
+          "content": "",
+
+          "tags": [
+
+          ],
+          "topic": null
+        }
+      },
+      {
+        "id": 45001363,
+        "startTime": 1734595488,
+        "type": 3,
+        "interviewType": 2,
+        "status": 4,
+        "result": 2,
+        "studentUid": 2633307145,
+        "courseId": 0,
+        "topic": null,
+        "remindId": 0,
+        "personUid": 3000039349,
+        "duration": 24000,
+        "callAssistantUid": 4254802674,
+        "callAssistantName": "南山老师-辅导(新)",
+        "subject": "",
+        "abstractInfo": {
+          "content": "老师向用户询问学生晚上八点能否准时到课。",
+          "todo": {
+            "remindId": 0,
+            "currentRemindId": "",
+            "createUid": 0,
+            "content": "",
+            "type": 0,
+            "remindTime": "",
+            "posRemindTime": "",
+            "fromType": 0,
+            "students": null,
+            "status": 0
+          },
+          "tags": null,
+          "topic": null
+        }
+      },
+      {
+        "id": 442880074,
+        "startTime": 1734595195,
+        "type": 2,
+        "interviewType": 2,
+        "status": 4,
+        "result": 2,
+        "studentUid": 2633307145,
+        "courseId": 3164523,
+        "topic": [
+          "家访",
+          "挽单"
+        ],
+        "remindId": 26271,
+        "personUid": 3000039349,
+        "duration": 111000,
+        "callAssistantUid": 4254802674,
+        "callAssistantName": "南山老师-辅导(新)",
+        "subject": "数学",
+        "abstractInfo": {
+          "content": "用户提到由于学校有课和作业多导致昨天未能到课，今天打算抽时间看课程回放。老师询问了学生是否能准时上明天晚上的直播课，用户表示可以。",
+          "todo": {
+            "remindId": 26271,
+            "currentRemindId": "26271_99991231235959",
+            "createUid": 3000039349,
+            "content": "发学习手册和课程大纲",
+            "type": 1,
+            "remindTime": "2024-12-20 16:00:08",
+            "posRemindTime": "",
+            "fromType": 1,
+            "students": [],
+            "status": 0
+          },
+          "tags": [
+            {
+              "tagkey": "不能到课原因",
+              "taginfo": "学校有课、作业多",
+              "tagvalue": "",
+              "hideflag": ""
+            }
+          ],
+          "topic": null
+        }
+      },
+      {
+        "id": 459982979,
+        "startTime": 1734577645,
+        "type": 2,
+        "interviewType": 2,
+        "status": 4,
+        "result": 2,
+        "studentUid": 2633307145,
+        "courseId": 3164523,
+        "topic": [
+          "转介绍",
+          "挽单"
+        ],
+        "remindId": 25133,
+        "personUid": 3000039349,
+        "duration": 78000,
+        "callAssistantUid": 4254802674,
+        "callAssistantName": "南山老师-辅导(新)",
+        "subject": "数学",
+        "abstractInfo": {
+          "content": "用户因身体不适未能到课，表示准备查看课程回放。由于难以跟上课程进度，计划参加后续的答疑课和小灶课。",
+          "todo": {
+            "remindId": 25133,
+            "currentRemindId": "25133_99991231235959",
+            "createUid": 3000039349,
+            "content": "发送小灶课习题",
+            "type": 1,
+            "remindTime": "2024-12-20 17:00:00",
+            "posRemindTime": "",
+            "fromType": 1,
+            "students": [],
+            "status": 0
+          },
+          "tags": [
+            {
+              "tagkey": "不能到课原因",
+              "taginfo": "身体不适",
+              "tagvalue": "",
+              "hideflag": ""
+            }
+          ],
+          "topic": null
+        }
+      }
+    ]
+  }
+}

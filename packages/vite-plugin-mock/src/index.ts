@@ -40,7 +40,6 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
                 configure: (proxy) =>
                   serverProxyConfig({
                     proxy,
-                    scene: opt?.scene,
                     prefix: prefix,
                     queryExclude: ['_'],
                     record: opt?.record,
@@ -56,7 +55,6 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
                   ...(proxy[key] as ProxyOptions),
                   configure: (proxy) =>
                     serverProxyConfig({
-                      scene: opt?.scene,
                       proxy,
                       prefix: prefix,
                       queryExclude: ['_'],

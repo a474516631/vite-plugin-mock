@@ -1,0 +1,34 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "failedStudentIds": [],
+    "preClassResultInfos": [
+      {
+        "studentUid": 2633307145,
+        "lessonStateResults": [
+          {
+            "lessonId": 4055823,
+            "preClassState": 5,
+            "editSuccess": 1
+          },
+          {
+            "lessonId": 4055824,
+            "preClassState": 5,
+            "editSuccess": 1
+          },
+          {
+            "lessonId": 4055825,
+            "preClassState": 5,
+            "editSuccess": 1
+          },
+          {
+            "lessonId": 4055826,
+            "preClassState": 5,
+            "editSuccess": 1
+          }
+        ]
+      }
+    ]
+  }
+}

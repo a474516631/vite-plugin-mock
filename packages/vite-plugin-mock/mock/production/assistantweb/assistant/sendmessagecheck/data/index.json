@@ -1,0 +1,10 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "status": 1,
+    "reason": "您正在使用企业微信服务，目前设备不在线，建议重启企业微信APP后，尝试重新发送。",
+    "usedLimit": 0,
+    "noticeLimit": 0
+  }
+}

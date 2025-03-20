@@ -1,0 +1,50 @@
+{
+  "errNo": 0,
+  "errMsg": "succ",
+  "data": {
+    "baseInfo": {
+      "interviewType": 9,
+      "interviewTypeStr": "电话",
+      "assistantName": "南山老师-辅导(新)",
+      "assistantUid": 4254802674,
+      "courseId": 3164523,
+      "courseName": "班课_小学数学QA",
+      "customDeviceId": "158****8725",
+      "customDeviceBelonger": "",
+      "createTime": 1734595195
+    },
+    "abstractInfo": {
+      "content": "用户提到由于学校有课和作业多导致昨天未能到课，今天打算抽时间看课程回放。老师询问了学生是否能准时上明天晚上的直播课，用户表示可以。",
+      "todo": {
+        "remindId": 26271,
+        "currentRemindId": "26271_99991231235959",
+        "createUid": 3000039349,
+        "content": "发学习手册和课程大纲",
+        "type": 1,
+        "remindTime": "2024-12-20 16:00:08",
+        "posRemindTime": "",
+        "fromType": 1,
+        "students": [],
+        "status": 0
+      },
+      "tags": [
+        {
+          "tagkey": "不能到课原因",
+          "taginfo": "学校有课、作业多",
+          "tagvalue": "",
+          "hideflag": ""
+        }
+      ],
+      "topic": [
+        "家访",
+        "挽单"
+      ]
+    },
+    "interviewInfo": {
+      "callId": 442880074,
+      "content": "[{\"sentence_id\":0,\"start_time\":0.72,\"end_time\":6.4,\"role\":1,\"content\":\"哈喽同学可以听到吗我这边是甜甜老师，然我看你昨天晚上有一节。\"},{\"sentence_id\":1,\"start_time\":6.68,\"end_time\":7.64,\"role\":0,\"content\":\"课没有到课。\"},{\"sentence_id\":2,\"start_time\":8.88,\"end_time\":19.88,\"role\":1,\"content\":\"嗯方便了解一下是什么原因没有到课吗，昨天是因为，然后学校里面有课。\"},{\"sentence_id\":3,\"start_time\":20.24,\"end_time\":33,\"role\":0,\"content\":\"然后作业比较多，然后我们这边完成学校的作业就没有准时到课，准备今天抽时间看一下回放，好的了解。\"},{\"sentence_id\":4,\"start_time\":34.12,\"end_time\":36.2,\"role\":1,\"content\":\"那那我们明天晚。\"},{\"sentence_id\":5,\"start_time\":36.36,\"end_time\":59.72,\"role\":0,\"content\":\"上的，明天晚上八点的直播课这边，能准时进入教室学习吗，可以的老师，好的好的，那，那，好的那我，周五下。\"},{\"sentence_id\":6,\"start_time\":59.92,\"end_time\":60.76,\"role\":1,\"content\":\"午我四点。\"},{\"sentence_id\":7,\"start_time\":61.04,\"end_time\":80.36,\"role\":0,\"content\":\"会把那个，那个学习手册发给您这边可以抽空看一下好吧，好的老师，呃我们这边还推出了对。\"},{\"sentence_id\":8,\"start_time\":80.96,\"end_time\":82.12,\"role\":1,\"content\":\"老生推出了一款。\"},{\"sentence_id\":9,\"start_time\":83,\"end_time\":85.64,\"role\":0,\"content\":\"嗯特惠课九块九十节课。\"},{\"sentence_id\":10,\"start_time\":86.24,\"end_time\":91,\"role\":1,\"content\":\"嗯里面包含PYTHON编程跟算法让你看你。\"},{\"sentence_id\":11,\"start_time\":91.16,\"end_time\":95.28,\"role\":0,\"content\":\"有有兴趣学习吗如果有兴趣的话可以联系我哟。\"},{\"sentence_id\":12,\"start_time\":96.88,\"end_time\":98,\"role\":1,\"content\":\"我稍后会把那个。\"},{\"sentence_id\":13,\"start_time\":98.92,\"end_time\":103.24,\"role\":0,\"content\":\"嗯课程大纲发给你可以看一下吧如果你有兴趣的话可以联系我。\"},{\"sentence_id\":14,\"start_time\":104.92,\"end_time\":105.76,\"role\":1,\"content\":\"嗯好的那。\"},{\"sentence_id\":15,\"start_time\":105.88,\"end_time\":109.76,\"role\":0,\"content\":\"没啥事儿咱先这样然后有问题再随时沟通好吧拜拜。\"}]",
+      "fileUrl": "https://charge.zuoyebang.cc/kunpeng_upload/5a2519daf5ee110c7b3f5f801c4570ec.mp3?authorization=bce-auth-v1%2F80054b2251d24cb98eda994c93426d7d%2F2025-01-15T11%3A19%3A34Z%2F86400%2Fhost%2Fc1aeddad4d2cc94a24929d34e12e781eb2be98bd6938f9270dd6ad92d66215dd",
+      "startTime": 1734595195
+    }
+  }
+}

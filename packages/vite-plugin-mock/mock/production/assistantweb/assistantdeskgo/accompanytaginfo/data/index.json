@@ -1,0 +1,20 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "tags": [
+      {
+        "label": "周六伴学",
+        "value": "1"
+      },
+      {
+        "label": "周日伴学",
+        "value": "2"
+      },
+      {
+        "label": "周二伴学",
+        "value": "5"
+      }
+    ]
+  }
+}

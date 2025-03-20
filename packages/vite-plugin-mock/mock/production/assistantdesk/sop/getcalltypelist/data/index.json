@@ -1,0 +1,36 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "callTypeList": [
+      {
+        "label": "家访",
+        "value": 1
+      },
+      {
+        "label": "日常维护",
+        "value": 11
+      },
+      {
+        "label": "续报",
+        "value": 5
+      },
+      {
+        "label": "挽单",
+        "value": 16
+      },
+      {
+        "label": "转介绍",
+        "value": 19
+      },
+      {
+        "label": "续报预约",
+        "value": 23
+      },
+      {
+        "label": "其他",
+        "value": 99
+      }
+    ]
+  }
+}

@@ -105,45 +105,74 @@ function extractRequestInfo(filePath: string, opt: ViteMockOptions): Recordable 
   const fileContent: string = fs.readFileSync(filePath, 'utf8')
   const map: Recordable = {}
   const ast = parse(Lang.TypeScript, fileContent)
-  const root = ast.root() // root is an instance of SgNode
-  try {
-    const exportFuns = root.findAll(
-      opt.findInterfaceType ??
-        `export function $NAME($$$:$REQ_TYPE):Promise<$RES_TYPE> {
-        return $$$($URL,$$$)
-      }`,
-    ) // search node
-    exportFuns.forEach((exportFun) => {
-      const req = exportFun?.getMatch('REQ_TYPE') // get matched variable
-      const res = exportFun?.getMatch('RES_TYPE') // get matched variable
-      let url = exportFun?.getMatch('URL')?.text() // get matched variable
-      if (!url) {
-        return
-      }
-      url = `${opt.prefix || ''}${likeStrToStr(url)}`
+  const root = ast.root()
 
-      const typeObj: Recordable = {}
-      if (req && req?.kind() === 'type_identifier') {
-        // console.log(req?.text())
-        const reqFindStr = `interface ${req?.text()} {$$$}`
-        const reqType = root.find(reqFindStr)
-        if (reqType) {
-          typeObj.reqType = reqType?.text()
+  try {
+    // 定义多个匹配模式，使用 $$$? 表示可选匹配
+    const patterns = opt.findInterfaceType
+      ? [opt.findInterfaceType]
+      : [
+          // Promise 风格 - 支持可选泛型
+          `export function $NAME($$$:$REQ_TYPE?):Promise<$RES_TYPE?> {
+        return $$$<$$$?>($URL,$$$)
+      }`,
+
+          // axios 风格 - 支持可选泛型
+          `export function $NAME($$$:$REQ_TYPE?) {
+        return axios<$RES_TYPE?>({
+          url: $URL,
+          $$$
+        })
+      }`,
+
+          // request 方法风格 - 支持可选泛型和可选参数
+          `export function $NAME($$$?) {
+        return request<$RES_TYPE?>($URL,$$$?)
+      }`,
+
+          // 箭头函数风格 - 支持可选类型
+          `export const $NAME = ($$$:$REQ_TYPE?):Promise<$RES_TYPE?> => {
+        return $$$<$$$?>($URL,$$$)
+      }`,
+        ]
+
+    // 遍历所有模式进行匹配
+    for (const pattern of patterns) {
+      const exportFuns = root.findAll(pattern)
+      exportFuns.forEach((exportFun) => {
+        const req = exportFun?.getMatch('REQ_TYPE')
+        const res = exportFun?.getMatch('RES_TYPE')
+        let url = exportFun?.getMatch('URL')?.text()
+
+        if (!url) return
+
+        url = `${opt.prefix || ''}${likeStrToStr(url)}`
+        const typeObj: Recordable = {}
+        if (req && req?.kind() === 'type_identifier') {
+          // console.log(req?.text())
+          const reqFindStr = `interface ${req?.text()} {$$$}`
+          const reqType = root.find(reqFindStr)
+          if (reqType) {
+            typeObj.reqType = reqType?.text()
+          }
+        } else if (req && req?.kind() === 'object_type') {
+          typeObj.reqType = req?.text()
         }
-      } else if (req && req?.kind() === 'object_type') {
-        typeObj.reqType = req?.text()
-      }
-      if (res && res?.kind() === 'type_identifier') {
-        const resFindStr = `interface ${res?.text()} {$$$}`
-        const resType = root.find(resFindStr)
-        if (resType) {
-          typeObj.resType = resType?.text()
+        if (res && res?.kind() === 'type_identifier') {
+          const resFindStr = `interface ${res?.text()} {$$$}`
+          const resType = root.find(resFindStr)
+          if (resType) {
+            typeObj.resType = resType?.text()
+          }
+          if (url === '/api/assistantdesk/api/sop/getstudentcallrecordinfobl') {
+            console.log('@@@@@@@@@@@@', res?.text())
+          }
+        } else if (res && res?.kind() === 'object_type') {
+          typeObj.resType = res?.text()
         }
-      } else if (res && res?.kind() === 'object_type') {
-        typeObj.resType = res?.text()
-      }
-      map[url] = typeObj
-    })
+        map[url] = typeObj
+      })
+    }
   } catch (error) {
     console.log(error)
   }

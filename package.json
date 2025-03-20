@@ -14,7 +14,8 @@
     "log": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "lint:lint-staged": "lint-staged -c ./.husky/lintstagedrc.js",
     "lint:eslint": "eslint \"src/**/*.{ts,tsx}\" --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "pnpm run -C packages/vite-plugin-mock dev "
   },
   "keywords": [
     "vite",

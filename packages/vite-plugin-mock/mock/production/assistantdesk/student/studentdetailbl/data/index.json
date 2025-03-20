@@ -1,0 +1,34 @@
+{
+  "errNo": 0,
+  "errStr": "success",
+  "data": {
+    "student": {
+      "leadsId": 1481614239,
+      "area": "",
+      "guardianWechatLight": 1,
+      "addressPhone": "",
+      "serviceType": 0,
+      "classId": 12758242,
+      "scRemark": "",
+      "preContinue": 0,
+      "machinePreContinue": 0,
+      "md5AddressPhone": "d41d8cd98f00b204e9800998ecf8427e"
+    },
+    "contactFlagDefault": "7",
+    "contactFlagTime": "",
+    "tags": [],
+    "buttonGroup": [
+      "callRecord",
+      "call",
+      "sendMessage",
+      "leave",
+      "homeVisit",
+      "edit",
+      "studentInfo",
+      "changeClass",
+      "toDo"
+    ],
+    "isLevelTwo": 0,
+    "isYKT": false
+  }
+}
