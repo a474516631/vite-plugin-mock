@@ -7,6 +7,20 @@ declare const URL: any
 declare const Headers: any
 declare const Response: any
 
+/**
+ * 创建生产环境模拟服务器
+ * 该函数拦截 XMLHttpRequest 和 fetch API 请求，根据 mockList 提供的配置返回模拟数据
+ * 从 3.0.3-beta.11 版本开始，支持 fetch API 和 XMLHttpRequest
+ *
+ * @param mockList 模拟数据配置列表
+ * @example
+ * ```ts
+ * import { createProdMockServer } from 'vite-plugin-ai-mock/client'
+ * import userMock from './mock/user'
+ *
+ * createProdMockServer([...userMock])
+ * ```
+ */
 export async function createProdMockServer(mockList: any[]) {
   const Mock: any = await import('mockjs')
   const { pathToRegexp } = await import('path-to-regexp')
@@ -239,6 +253,26 @@ function __setupMock__(mock: any, timeout = 0) {
     })
 }
 
+/**
+ * 定义模拟模块的辅助函数
+ * 用于简化模拟模块的定义，支持基于环境配置的动态模拟数据
+ *
+ * @param fn 根据环境配置返回模拟数据的函数
+ * @example
+ * ```ts
+ * export default defineMockModule(({ mode }) => {
+ *   return [
+ *     {
+ *       url: '/api/users',
+ *       method: 'get',
+ *       response: mode === 'development'
+ *         ? developmentData
+ *         : productionData
+ *     }
+ *   ]
+ * })
+ * ```
+ */
 export function defineMockModule(
   fn: (config: {
     env: Record<string, any>
@@ -248,3 +282,6 @@ export function defineMockModule(
 ) {
   return fn
 }
+
+// 重新导出 MockMethod 类型以便用户不必从主包导入
+export type { MockMethod }

@@ -470,6 +470,10 @@ export function setupProdMockServer() {
 }
 ```
 
+> **注意**：从 3.0.3-beta.11 版本开始，client 模块已被单独打包，支持更好的按需导入和 tree-shaking。请确保使用正确的导入路径 `vite-plugin-ai-mock/client`。
+
+该模块同时支持 XMLHttpRequest 和 fetch API，可以拦截前端所有类型的请求。
+
 2. 在项目入口文件中导入并调用：
 
 ```typescript
