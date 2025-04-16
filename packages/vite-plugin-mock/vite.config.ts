@@ -9,12 +9,14 @@ import UnoCSS from 'unocss/vite'
 import UnIcon from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import { viteMockServe } from 'vite-plugin-ai-mock'
-
+import topLevelAwait from 'vite-plugin-top-level-await'
+import wasm from 'vite-plugin-wasm'
 export default defineConfig(({ command }) => ({
   base: command === 'build' ? '/__mock/' : '/',
   plugins: [
+    wasm(),
     UnoCSS(),
-
+    topLevelAwait(),
     Vue(),
     viteMockServe({
       mockPath: 'mock',

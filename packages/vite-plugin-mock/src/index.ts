@@ -17,6 +17,7 @@ import { createRequestTsServer, requestTsData } from './createTsTypeServer'
 import { getMockData } from './suggestionGpt'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { updateTypeInFile, findInterfaceFileByUrl } from './typeGenerator'
 
 const _dirname =
   typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
@@ -107,6 +108,74 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
           res.end()
           return
         }
+
+        // 写入类型定义的API端点
+        if (req.url === '/write-type-definition' && req.method === 'POST') {
+          let body = ''
+          req.on('data', (chunk: any) => {
+            body += chunk.toString()
+          })
+
+          req.on('end', async () => {
+            try {
+              const typeInfo = JSON.parse(body)
+              const { url, typeDefinition, typeName } = typeInfo
+
+              // 检查必要参数
+              if (!url || !typeDefinition || !typeName) {
+                throw new Error('缺少必要参数：url、typeDefinition 或 typeName')
+              }
+
+              // 检查请求路径配置
+              if (!opt.requestPath) {
+                throw new Error('未配置 requestPath，无法找到接口文件')
+              }
+
+              // 查找接口文件
+              const matchingFiles = findInterfaceFileByUrl(url, opt.requestPath)
+
+              if (matchingFiles.length === 0) {
+                throw new Error(`未找到包含 URL ${url} 的接口文件`)
+              }
+
+              // 更新找到的所有匹配文件
+              let updatedCount = 0
+              for (const filePath of matchingFiles) {
+                const updated = updateTypeInFile(filePath, url, typeDefinition, typeName)
+                if (updated) {
+                  updatedCount++
+                }
+              }
+
+              if (updatedCount > 0) {
+                res.statusCode = 200
+                res.setHeader('Content-Type', 'application/json')
+                res.write(
+                  JSON.stringify({
+                    success: true,
+                    message: `成功更新 ${updatedCount} 个文件的类型定义`,
+                    updatedFiles: matchingFiles,
+                  }),
+                )
+              } else {
+                throw new Error('找到接口文件但更新类型失败')
+              }
+            } catch (error) {
+              console.error('写入类型定义失败:', error)
+              res.statusCode = 500
+              res.setHeader('Content-Type', 'application/json')
+              res.write(
+                JSON.stringify({
+                  success: false,
+                  message: `写入类型定义失败: ${error}`,
+                }),
+              )
+            }
+            res.end()
+          })
+          return
+        }
+
         console.log(req.url)
         if (req.url.startsWith('/ai-mock')) {
           let queryParams: {

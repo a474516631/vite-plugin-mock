@@ -56,6 +56,7 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
     "floating-vue": "^5.2.2",
+    "json_typegen_wasm": "^0.7.0",
     "path-to-regexp": "^6.2.1",
     "picocolors": "^1.0.0",
     "prettier": "^2.8.7",
@@ -97,6 +98,8 @@
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.4.9",
     "vite-plugin-pages": "^0.28.0",
+    "vite-plugin-top-level-await": "^1.5.0",
+    "vite-plugin-wasm": "^3.4.1",
     "vue-docgen-api": "^4.79.2"
   }
 }

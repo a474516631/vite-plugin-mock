@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import {  computed,  ref, watch, watchEffect } from 'vue';
+import {  computed,  ref, watch, watchEffect, onMounted } from 'vue';
 import { codeToHtml } from 'shiki'
 import { standFetch } from '../request';
 import { useDark } from '@vueuse/core';
 import { useHTMLPrettify, useJSONPrettify, useJSPrettify } from '../composables/usePrettify';
+import { generateTypeDefinition, writeTypeDefinitionToFile } from '../utils/typeGenerator';
+
 const props = defineProps<{ url: string, method: string }>()
 const emptyCode = ref('')
 const showDemo = ref(false)
@@ -129,7 +131,68 @@ async function getAiMockRes(){
 
   mockRes.value = res as any
   aiLoading.value = false
+}
 
+async function generateTypeDefinitionAndWrite() {
+  try {
+    if (!props.url) return
+    
+    // 显示加载状态
+    aiLoading.value = true
+    mockResShow.value = true
+    
+    // 前端生成类型定义
+    const typeInfo = await generateTypeDefinition(props.url, mockData.value);
+    
+    // 显示生成的类型
+    const typeDefHtml = await codeToHtml(typeInfo.typeDefinition, {
+      lang: 'typescript',
+      theme: isDark.value ? 'github-dark' : 'github-light',
+    });
+    
+    mockResHtml.value = `<div class="mb-4">已生成类型定义 <span class="text-blue font-bold">${typeInfo.typeName}</span>:</div>
+                          <div class="mb-4">${typeDefHtml}</div>
+                          <div class="mb-2">正在写入文件...</div>`;
+    
+    // 发送到后端写入文件
+    const result = await writeTypeDefinitionToFile({
+      url: props.url,
+      method: props.method,
+      typeName: typeInfo.typeName,
+      typeDefinition: typeInfo.typeDefinition,
+    });
+    
+    // 显示写入结果
+    if (result.success) {
+      mockResHtml.value += `<div class="text-green">✅ ${result.message}</div>`;
+      if (result.updatedFiles && result.updatedFiles.length > 0) {
+        mockResHtml.value += `<div class="mt-2">已更新的文件:</div>
+                            <ul class="list-disc pl-4">
+                              ${result.updatedFiles.map(f => `<li>${f}</li>`).join('')}
+                            </ul>`;
+      }
+    } else {
+      mockResHtml.value += `<div class="text-red">❌ ${result.message}</div>`;
+    }
+  } catch (error) {
+    console.error('生成类型定义失败:', error);
+    mockResHtml.value = `<div class="text-red">❌ 生成类型定义失败: ${error}</div>`;
+  } finally {
+    aiLoading.value = false;
+  }
+}
+
+async function writeToMockFile() {
+  try {
+    if (!props.url || !mockResHtml.value) return
+    
+    // 这里可以实现写入Mock文件的功能
+    // 这个功能现在还未实现，可以先显示一个提示
+    mockResHtml.value = '<div class="text-green">✅ 此功能正在开发中</div>'
+  } catch (error) {
+    console.error('写入文件失败:', error)
+    mockResHtml.value = '<div class="text-red">❌ 写入文件失败，请检查控制台错误</div>'
+  }
 }
 
 </script>
@@ -178,13 +241,17 @@ async function getAiMockRes(){
 
               </div>
               <div class="flex gap-4">
-                <div class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">
-                  <span class="i-ant-design:yuque-filled  mr-1 text-blue"></span>
+                <div class="text-12px text-blue cursor-pointer" @click="getAiMockRes">
+                  <span class="i-ant-design:yuque-filled mr-1 text-blue"></span>
                   <span>生成 Mock 数据</span>
                 </div>
-                <div v-if="mockResHtml" class="text-12px text-blue  cursor-pointer" @click="getAiMockRes">
+                <div v-if="mockResHtml" class="text-12px text-blue cursor-pointer" @click="writeToMockFile">
                   <span class="i-ant-design:edit-outlined mr-1"></span>
                   <span>写入文件</span>
+                </div>
+                <div class="text-12px text-blue cursor-pointer" @click="generateTypeDefinitionAndWrite">
+                  <span class="i-ant-design:code-outlined mr-1 text-blue"></span>
+                  <span>生成类型</span>
                 </div>
               </div>
             </div>
