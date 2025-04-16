@@ -225,4 +225,6 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
   }
 }
 
+export * from './client'
+
 export * from './types'
