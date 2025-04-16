@@ -175,7 +175,6 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
       )
 
       // 根据收集到的数据构建 Response
-      const contentType = mockRes.headers.get('Content-Type') || 'application/json'
       return new Response(responseBody, {
         status: mockServerResponse.statusCode,
         headers: mockRes.headers,
