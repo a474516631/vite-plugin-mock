@@ -22,7 +22,7 @@ declare const Response: any
  * ```
  */
 export async function createProdMockServer(mockList: any[]) {
-  const Mock: any = await import('mockjs')
+  const Mock = (await import('mockjs')).default
   const { pathToRegexp } = await import('path-to-regexp')
 
   // 确保在浏览器环境中运行
