@@ -1,4 +1,5 @@
 /* eslint-disable */
+import { Mockjs } from 'mockjs'
 import type { MockMethod } from './types'
 
 // 声明变量以解决浏览器 API 的类型问题
@@ -21,7 +22,7 @@ declare const Response: any
  * createProdMockServer([...userMock])
  * ```
  */
-export async function createProdMockServer(mockList: any[]) {
+export async function createProdMockServer(mockList: any[], options = { debug: false }) {
   const Mock = (await import('mockjs')).default
   const { pathToRegexp } = await import('path-to-regexp')
 
@@ -29,6 +30,30 @@ export async function createProdMockServer(mockList: any[]) {
   if (typeof window === 'undefined') {
     console.warn('createProdMockServer 应该在浏览器环境中运行')
     return
+  }
+
+  // 添加全局开关
+  window.__MOCK_ENABLED__ = true
+  window.__MOCK_DEBUG__ = options.debug
+
+  // 提供控制方法
+  window.__MOCK_CONTROL__ = {
+    enable: () => {
+      window.__MOCK_ENABLED__ = true
+    },
+    disable: () => {
+      window.__MOCK_ENABLED__ = false
+    },
+    status: () => {
+      console.log(`Mock 状态: ${window.__MOCK_ENABLED__ ? '启用' : '禁用'}`)
+      console.log(`已配置的接口: ${mockList.length}个`)
+      console.table(
+        mockList.map((item) => ({
+          url: item.url,
+          method: item.method || 'GET',
+        })),
+      )
+    },
   }
 
   // 保存原始的 XMLHttpRequest 和 fetch
@@ -86,8 +111,15 @@ function setupXHRMock(Mock: any, pathToRegexp: any, mockList: any[]) {
 function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalFetch: any) {
   // 替换全局 fetch
   window.fetch = async function (input: any, init?: any): Promise<any> {
+    if (!window.__MOCK_ENABLED__) {
+      return originalFetch(input, init)
+    }
+
     const url = typeof input === 'string' ? input : input instanceof URL ? input.href : input.url
     const method = (init?.method || 'get').toLowerCase()
+
+    // 添加请求日志
+    console.log(`[Mock] 拦截请求: ${method.toUpperCase()} ${url}`)
 
     // 查找匹配的 mock 配置
     const matchedItem = mockList.find((item) => {
@@ -96,43 +128,31 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
 
       try {
         const regex = pathToRegexp(mockUrl, undefined, { end: false })
-        return regex.test(url) && mockMethod === method
+        const isMatch = regex.test(url) && mockMethod === method
+
+        // 记录匹配结果
+        if (isMatch) {
+          console.log(`[Mock] ✅ 匹配成功: ${mockUrl}`)
+        }
+        return isMatch
       } catch (e) {
         return false
       }
     })
 
     if (!matchedItem) {
-      // 没有匹配的 mock 配置，调用原始 fetch
+      console.log(`[Mock] ❌ 未匹配到配置，使用原始请求`)
       return originalFetch(input, init)
     }
 
-    // 解析请求信息
-    let body: any = undefined
-    if (init?.body) {
-      try {
-        body = JSON.parse(init.body.toString())
-      } catch (e) {
-        // 非 JSON 格式的 body，保持原样
-        body = init.body
-      }
-    }
-
-    // 构建请求配置
-    const reqConfig = {
-      method,
-      body,
-      query: __param2Obj__(url),
-      headers: init?.headers || {},
-      url: url,
-    }
-
-    // 处理响应
+    // 记录返回的 mock 数据
     let responseData
     if (typeof matchedItem.response === 'function') {
       responseData = matchedItem.response(reqConfig)
+      console.log(`[Mock] 📦 返回函数生成的数据:`, responseData)
     } else {
       responseData = matchedItem.response
+      console.log(`[Mock] 📦 返回静态数据:`, responseData)
     }
 
     // 应用 Mock.js 处理
@@ -197,12 +217,19 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
     }
 
     // 构建标准 Response
-    return new Response(JSON.stringify(responseData), {
-      headers: {
-        'Content-Type': 'application/json',
+    return new Response(
+      JSON.stringify({
+        ...responseData,
+        __mocked__: true,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Mocked': 'true',
+        },
+        status: matchedItem.statusCode || 200,
       },
-      status: matchedItem.statusCode || 200,
-    })
+    )
   }
 }
 
@@ -285,3 +312,39 @@ export function defineMockModule(
 
 // 重新导出 MockMethod 类型以便用户不必从主包导入
 export type { MockMethod }
+
+export async function verifyMockSetup() {
+  // 创建一个特殊的测试端点
+  const testEndpoint = '/__mock_verify__'
+  const testResponse = { verified: true, timestamp: Date.now() }
+
+  // 添加一个临时的 mock 规则
+  window.__mockList__.push({
+    url: testEndpoint,
+    method: 'get',
+    response: testResponse,
+  })
+
+  try {
+    // 发送验证请求
+    const response = await fetch(testEndpoint)
+    const data = await response.json()
+
+    // 验证响应与预期是否匹配
+    const isVerified = data.verified === true
+
+    console.log(`[Mock] 验证${isVerified ? '成功' : '失败'}!`)
+    console.log(`[Mock] ${isVerified ? '✅ Mock 拦截器工作正常' : '❌ Mock 拦截器未正确工作'}`)
+
+    return isVerified
+  } catch (error) {
+    console.error('[Mock] 验证过程出错:', error)
+    return false
+  } finally {
+    // 移除临时测试规则
+    const index = window.__mockList__.findIndex((item) => item.url === testEndpoint)
+    if (index !== -1) {
+      window.__mockList__.splice(index, 1)
+    }
+  }
+}
