@@ -1,5 +1,4 @@
 /* eslint-disable */
-import { Mockjs } from 'mockjs'
 import type { MockMethod } from './types'
 
 // 声明变量以解决浏览器 API 的类型问题
@@ -7,6 +6,7 @@ declare const window: any
 declare const URL: any
 declare const Headers: any
 declare const Response: any
+declare const fetch: any
 
 /**
  * 创建生产环境模拟服务器
@@ -35,6 +35,7 @@ export async function createProdMockServer(mockList: any[], options = { debug: f
   // 添加全局开关
   window.__MOCK_ENABLED__ = true
   window.__MOCK_DEBUG__ = options.debug
+  window.__mockList__ = mockList // 保存 mockList 引用以便验证函数使用
 
   // 提供控制方法
   window.__MOCK_CONTROL__ = {
@@ -143,6 +144,26 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
     if (!matchedItem) {
       console.log(`[Mock] ❌ 未匹配到配置，使用原始请求`)
       return originalFetch(input, init)
+    }
+
+    // 解析请求信息
+    let body: any = undefined
+    if (init?.body) {
+      try {
+        body = JSON.parse(init.body.toString())
+      } catch (e) {
+        // 非 JSON 格式的 body，保持原样
+        body = init.body
+      }
+    }
+
+    // 构建请求配置
+    const reqConfig = {
+      method,
+      body,
+      query: __param2Obj__(url),
+      headers: init?.headers || {},
+      url: url,
     }
 
     // 记录返回的 mock 数据
@@ -313,10 +334,20 @@ export function defineMockModule(
 // 重新导出 MockMethod 类型以便用户不必从主包导入
 export type { MockMethod }
 
+/**
+ * 验证 Mock 拦截器是否正常工作
+ * 通过创建临时测试端点并发送请求来验证 Mock 拦截是否成功
+ * @returns Promise<boolean> Mock 拦截是否正常工作
+ */
 export async function verifyMockSetup() {
   // 创建一个特殊的测试端点
   const testEndpoint = '/__mock_verify__'
   const testResponse = { verified: true, timestamp: Date.now() }
+
+  if (!window.__mockList__) {
+    console.error('[Mock] 验证失败: window.__mockList__ 未定义')
+    return false
+  }
 
   // 添加一个临时的 mock 规则
   window.__mockList__.push({
@@ -327,7 +358,7 @@ export async function verifyMockSetup() {
 
   try {
     // 发送验证请求
-    const response = await fetch(testEndpoint)
+    const response = await window.fetch(testEndpoint)
     const data = await response.json()
 
     // 验证响应与预期是否匹配
@@ -342,7 +373,7 @@ export async function verifyMockSetup() {
     return false
   } finally {
     // 移除临时测试规则
-    const index = window.__mockList__.findIndex((item) => item.url === testEndpoint)
+    const index = window.__mockList__.findIndex((item: any) => item.url === testEndpoint)
     if (index !== -1) {
       window.__mockList__.splice(index, 1)
     }
