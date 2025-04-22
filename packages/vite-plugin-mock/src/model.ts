@@ -1,5 +1,5 @@
-import { ChatOpenAI } from '@langchain/openai'
 import 'openai/shims/node'
+import { ChatOpenAI } from '@langchain/openai'
 export function getAiModel(params: { openAIApiKey: string; modelName: string }) {
   const { openAIApiKey, modelName } = params
   const chatModel = new ChatOpenAI({
