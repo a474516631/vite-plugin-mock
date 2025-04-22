@@ -25,6 +25,7 @@
   "author": "Vben",
   "license": "MIT",
   "devDependencies": {
+    "openai": "^4.95.1",
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
     "@types/connect": "^3.4.35",
