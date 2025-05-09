@@ -1,4 +1,6 @@
 import 'openai/shims/node'
+import 'web-streams-polyfill/polyfill'
+
 import { ChatOpenAI } from '@langchain/openai'
 export function getAiModel(params: { openAIApiKey: string; modelName: string }) {
   const { openAIApiKey, modelName } = params

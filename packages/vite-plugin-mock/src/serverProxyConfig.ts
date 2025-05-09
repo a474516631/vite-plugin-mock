@@ -56,6 +56,7 @@ enum HTTPMethod {
  * VITE_MOCK_MODE 为 RECORD 时替换vite中的server/proxy/configure
  */
 export function serverProxyConfig(params: ServeMockExtra) {
+  console.log('params', params)
   return new ServerMockProxy({ ...params })
 }
 
@@ -75,6 +76,7 @@ class ServerMockProxy {
 
   /** 处理代理指定环境的接口响应数据并写入本地mock文件 */
   onProxyResHandler(proxyRes: IncomingMessage, req: IncomingMessage) {
+    console.log('proxyRes', proxyRes)
     const contentEncode = proxyRes.headers['content-encoding']
     let body = ''
     if (!contentEncode) {

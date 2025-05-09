@@ -1,12 +1,17 @@
 /* eslint-disable */
 import type { MockMethod } from './types'
 
-// 声明变量以解决浏览器 API 的类型问题
-declare const window: any
-declare const URL: any
-declare const Headers: any
-declare const Response: any
-declare const fetch: any
+// 声明更完整的类型，包含可能在运行时使用的API
+interface IWindow {
+  [key: string]: any
+  fetch?: any
+  Blob?: any
+  TextEncoder?: any
+}
+
+// 将window声明为可选，以便在Node.js环境中不会报错
+declare const window: IWindow | undefined
+declare const global: IWindow | undefined
 
 /**
  * 创建生产环境模拟服务器
@@ -23,14 +28,14 @@ declare const fetch: any
  * ```
  */
 export async function createProdMockServer(mockList: any[], options = { debug: false }) {
-  const Mock = (await import('mockjs')).default
-  const { pathToRegexp } = await import('path-to-regexp')
-
-  // 确保在浏览器环境中运行
+  // 检查是否在浏览器环境中
   if (typeof window === 'undefined') {
     console.warn('createProdMockServer 应该在浏览器环境中运行')
     return
   }
+
+  const Mock = (await import('mockjs')).default
+  const { pathToRegexp } = await import('path-to-regexp')
 
   // 添加全局开关
   window.__MOCK_ENABLED__ = true
@@ -109,7 +114,57 @@ function setupXHRMock(Mock: any, pathToRegexp: any, mockList: any[]) {
   }
 }
 
+// 创建一个模拟的响应对象，避免直接使用 Response
+function createMockResponse(body: any, options: any = {}) {
+  const defaults = {
+    status: 200,
+    statusText: 'OK',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }
+
+  const config = { ...defaults, ...options }
+  const bodyText = typeof body === 'string' ? body : JSON.stringify(body)
+
+  // 这个函数在浏览器环境下运行，不在 Node.js 构建时运行
+  return {
+    status: config.status,
+    statusText: config.statusText,
+    headers: config.headers,
+    ok: config.status >= 200 && config.status < 300,
+    json: () => Promise.resolve(typeof body === 'string' ? JSON.parse(body) : body),
+    text: () => Promise.resolve(bodyText),
+    blob: () => {
+      // 使用运行时检查而不是编译时依赖
+      const globalObj: IWindow =
+        typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {}
+      if (globalObj && typeof globalObj.Blob !== 'undefined') {
+        return Promise.resolve(new globalObj.Blob([bodyText], { type: 'application/json' }))
+      }
+      throw new Error('Blob is not supported in this environment')
+    },
+    arrayBuffer: () => {
+      // 使用运行时检查
+      const globalObj: IWindow =
+        typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : {}
+      if (globalObj && typeof globalObj.TextEncoder !== 'undefined') {
+        const encoder = new globalObj.TextEncoder()
+        return Promise.resolve(encoder.encode(bodyText).buffer)
+      }
+      throw new Error('TextEncoder is not supported in this environment')
+    },
+    bodyUsed: false,
+    url: '',
+    type: 'basic',
+    redirected: false,
+  }
+}
+
 function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalFetch: any) {
+  // 确保在浏览器环境中
+  if (typeof window === 'undefined') return
+
   // 替换全局 fetch
   window.fetch = async function (input: any, init?: any): Promise<any> {
     if (!window.__MOCK_ENABLED__) {
@@ -186,19 +241,9 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
 
     // 如果配置了 rawResponse，则使用自定义响应
     if (matchedItem.rawResponse) {
-      // 创建一个模拟的 Response 对象
-      const mockRes = {
-        status: 200,
-        headers: new Headers({
-          'Content-Type': 'application/json',
-        }),
-        body: null,
-        statusText: 'OK',
-        ok: true,
-        type: 'basic',
-        redirected: false,
-        url: url,
-        bodyUsed: false,
+      // 创建自定义的 headers 对象
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
       }
 
       // 用于保存 rawResponse 写入的数据
@@ -207,7 +252,7 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
       // 模拟 res.write 和 res.end
       const mockServerResponse = {
         setHeader: (name: string, value: string) => {
-          mockRes.headers.set(name, value)
+          headers[name] = value
         },
         statusCode: 200,
         write: (chunk: string) => {
@@ -229,28 +274,27 @@ function setupFetchMock(Mock: any, pathToRegexp: any, mockList: any[], originalF
         mockServerResponse,
       )
 
-      // 根据收集到的数据构建 Response
-      return new Response(responseBody, {
+      // 使用自定义的模拟响应
+      return createMockResponse(responseBody, {
         status: mockServerResponse.statusCode,
-        headers: mockRes.headers,
+        headers,
         statusText: mockServerResponse.statusCode === 200 ? 'OK' : 'Error',
       })
     }
 
-    // 构建标准 Response
-    return new Response(
-      JSON.stringify({
-        ...responseData,
-        __mocked__: true,
-      }),
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Mocked': 'true',
-        },
-        status: matchedItem.statusCode || 200,
+    // 构建标准模拟响应
+    const mockResponseData = {
+      ...responseData,
+      __mocked__: true,
+    }
+
+    return createMockResponse(mockResponseData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Mocked': 'true',
       },
-    )
+      status: matchedItem.statusCode || 200,
+    })
   }
 }
 
@@ -340,6 +384,12 @@ export type { MockMethod }
  * @returns Promise<boolean> Mock 拦截是否正常工作
  */
 export async function verifyMockSetup() {
+  // 确保在浏览器环境中
+  if (typeof window === 'undefined') {
+    console.error('[Mock] 验证失败: 不在浏览器环境中')
+    return false
+  }
+
   // 创建一个特殊的测试端点
   const testEndpoint = '/__mock_verify__'
   const testResponse = { verified: true, timestamp: Date.now() }
