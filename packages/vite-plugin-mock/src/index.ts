@@ -86,7 +86,7 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       }
       middlewares.use(
         '/__mock',
-        sirv(path.resolve(_dirname, '../dist/client'), {
+        sirv(path.resolve(_dirname, '../client'), {
           single: true,
           dev: true,
         }),
@@ -236,7 +236,5 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
     },
   }
 }
-
-export * from './prodMockServer'
 
 export * from './types'

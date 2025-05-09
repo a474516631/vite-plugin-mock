@@ -5,11 +5,7 @@ export default defineBuildConfig({
     // 主入口
     'src/index',
     // 客户端入口
-    {
-      input: 'src/prodMockServer',
-      name: 'prodMockServer',
-      outDir: 'dist',
-    },
+    'src/prodMockServer',
   ],
   clean: false,
   declaration: true,

@@ -169,8 +169,8 @@ export function printInfo(
   },
   spacing = '  ',
 ) {
-  const { port = 5173, host = 'localhost' } = options.server!
-
+  const { port = 5173 } = options.server!
+  const host = 'localhost'
   // eslint-disable-next-line no-console
   console.log(
     `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mViteAiMock\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/__mock\x1B[24m\x1B[39m`,
