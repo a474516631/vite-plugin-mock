@@ -6,12 +6,12 @@ export default defineBuildConfig({
     'src/index',
     // 客户端入口
     {
-      input: 'src/client',
-      name: 'client',
+      input: 'src/prodMockServer',
+      name: 'prodMockServer',
       outDir: 'dist',
     },
   ],
-  clean: true,
+  clean: false,
   declaration: true,
   rollup: {
     emitCJS: true,

@@ -12,9 +12,9 @@
       "require": "./dist/index.cjs"
     },
     "./client": {
-      "types": "./dist/client.d.ts",
-      "import": "./dist/client.mjs",
-      "require": "./dist/client.cjs"
+      "types": "./dist/prodMockServer.d.ts",
+      "import": "./dist/prodMockServer.mjs",
+      "require": "./dist/prodMockServer.cjs"
     }
   },
   "files": [
@@ -59,7 +59,7 @@
     "path-to-regexp": "^6.2.1",
     "prettier": "^2.8.7",
     "shiki": "^1.22.0",
-    "sirv": "^2.0.4",
+    "sirv": "2.0.4",
     "splitpanes": "^3.1.5",
     "vue": "^3.5.12",
     "vue-router": "^4.1.6",

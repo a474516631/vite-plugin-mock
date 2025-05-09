@@ -159,3 +159,20 @@ export function resolveUrlPathnameSearch(url: string, queryExclude?: string[]) {
 export function likeStrToStr(str: string) {
   return str.replaceAll(/'|"|`/g, '')
 }
+
+export function printInfo(
+  options: {
+    server: {
+      port?: number
+      host?: string | boolean
+    }
+  },
+  spacing = '  ',
+) {
+  const { port = 5173, host = 'localhost' } = options.server!
+
+  // eslint-disable-next-line no-console
+  console.log(
+    `  \x1B[32m➜\x1B[39m${spacing}\x1B[1mViteAiMock\x1B[22m: \x1B[36m\x1B[4mhttp://${host}:${port}/__mock\x1B[24m\x1B[39m`,
+  )
+}

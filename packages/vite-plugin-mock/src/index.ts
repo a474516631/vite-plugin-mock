@@ -18,6 +18,7 @@ import { getMockData } from './suggestionGpt'
 import { dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { updateTypeInFile, findInterfaceFileByUrl } from './typeGenerator'
+import { printInfo } from './utils'
 
 const _dirname =
   typeof __dirname !== 'undefined' ? __dirname : dirname(fileURLToPath(import.meta.url))
@@ -77,7 +78,8 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       isDev && createRequestTsServer(opt, config)
     },
 
-    configureServer: async ({ middlewares }) => {
+    configureServer: async (server) => {
+      const { middlewares, printUrls } = server
       const { enable = isDev } = opt
       if (!enable) {
         return
@@ -219,12 +221,22 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
 
       const middleware = await requestMiddleware(opt)
       middlewares.use(middleware)
+      const _printUrls = printUrls
+      server.printUrls = () => {
+        _printUrls()
+        printInfo({
+          server: {
+            port: config.server.port,
+            host: config.server.host,
+          },
+        })
+      }
       // const recordMiddleware = await recordRequestMiddleware(opt)
       // middlewares.use(recordMiddleware)
     },
   }
 }
 
-export * from './client'
+export * from './prodMockServer'
 
 export * from './types'

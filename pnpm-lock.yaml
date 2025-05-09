@@ -170,7 +170,7 @@ importers:
         specifier: ^1.22.0
         version: 1.24.2
       sirv:
-        specifier: ^2.0.4
+        specifier: 2.0.4
         version: 2.0.4
       splitpanes:
         specifier: ^3.1.5
@@ -2047,7 +2047,7 @@ packages:
     dev: true
 
   /@polka/url@1.0.0-next.28:
-    resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==, tarball: http://ued.zuoyebang.cc/@polka%2furl/-/url-1.0.0-next.28.tgz}
+    resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==, tarball: http://ued.zuoyebang.cc:80/@polka%2furl/-/url-1.0.0-next.28.tgz}
 
   /@rollup/plugin-alias@5.0.0(rollup@3.29.5):
     resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==, tarball: http://ued.zuoyebang.cc/@rollup%2fplugin-alias/-/plugin-alias-5.0.0.tgz}
@@ -6598,7 +6598,7 @@ packages:
     dev: true
 
   /mrmime@2.0.0:
-    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==, tarball: http://ued.zuoyebang.cc/mrmime/-/mrmime-2.0.0.tgz}
+    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==, tarball: http://ued.zuoyebang.cc:80/mrmime/-/mrmime-2.0.0.tgz}
     engines: {node: '>=10'}
 
   /ms@2.0.0:
@@ -8047,7 +8047,7 @@ packages:
     dev: true
 
   /sirv@2.0.4:
-    resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==, tarball: http://ued.zuoyebang.cc/sirv/-/sirv-2.0.4.tgz}
+    resolution: {integrity: sha512-94Bdh3cC2PKrbgSOUqTiGPWVZeSiXfKOVZNJniWoqrWrRkB1CJzBU3NEbiTsPcYy1lDsANA/THzS+9WBiy5nfQ==, tarball: https://ued.zuoyebang.cc/sirv/-/sirv-2.0.4.tgz}
     engines: {node: '>= 10'}
     dependencies:
       '@polka/url': 1.0.0-next.28
@@ -8431,7 +8431,7 @@ packages:
     dev: true
 
   /totalist@3.0.1:
-    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==, tarball: http://ued.zuoyebang.cc/totalist/-/totalist-3.0.1.tgz}
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==, tarball: http://ued.zuoyebang.cc:80/totalist/-/totalist-3.0.1.tgz}
     engines: {node: '>=6'}
 
   /tr46@0.0.3:
