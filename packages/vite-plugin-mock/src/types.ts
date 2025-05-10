@@ -31,6 +31,8 @@ export interface ViteMockOptions {
   findInterfaceType?: string
   // 场景
   scene?: string
+  // 自定义代理配置，用于 VitePress 等环境
+  proxy?: Record<string, any>
 }
 
 export interface RespThisType {

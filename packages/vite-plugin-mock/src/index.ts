@@ -31,51 +31,51 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
     name: 'vite:mock',
     enforce: 'pre' as const,
 
-    config(config, env) {
-      if (config.server && config.server.proxy) {
-        const { proxy } = config.server
-        const prefix = opt?.prefix || '/api'
-        if (opt.record) {
-          Object.keys(proxy).forEach((key) => {
-            if (typeof proxy[key] === 'string') {
-              proxy[key] = {
-                configure: (proxy) =>
-                  serverProxyConfig({
-                    proxy,
-                    prefix: prefix,
-                    queryExclude: ['_'],
-                    record: opt?.record,
-                    recordExclude: opt?.recordExclude,
-                    logger: opt?.logger,
-                  }),
-              }
-            }
-            if (!(proxy[key] as ProxyOptions).configure) {
-              const target = (proxy[key] as ProxyOptions).target as string
-              if (typeof target === 'string') {
-                proxy[key] = {
-                  ...(proxy[key] as ProxyOptions),
-                  configure: (proxy) =>
-                    serverProxyConfig({
-                      proxy,
-                      prefix: prefix,
-                      queryExclude: ['_'],
-                      record: opt?.record,
-                      recordExclude: opt?.recordExclude,
-                      logger: opt?.logger,
-                    }),
-                }
-              }
-            }
-          })
-        }
-      }
-    },
     configResolved(resolvedConfig) {
       config = resolvedConfig
       isDev = config.command === 'serve'
       isDev && createMockServer(opt, config)
       isDev && createRequestTsServer(opt, config)
+    },
+
+    // 标准的Vite插件配置修改方式
+    config(config) {
+      // 如果没有配置 record，直接返回，不需要处理代理
+      if (!opt.record) {
+        return
+      }
+
+      // 确保基本配置存在
+      config.server = config.server || {}
+      config.server.proxy = config.server.proxy || {}
+
+      const prefix = opt?.prefix || '/api'
+      const proxy = config.server.proxy as Record<string, any>
+
+      // 处理已有的代理配置
+      if (Object.keys(proxy).length > 0) {
+        Object.keys(proxy).forEach((key) => {
+          applyProxyConfig(proxy, key, prefix, opt)
+        })
+      }
+
+      // 如果用户在插件选项中提供了代理配置，则合并它
+      if (opt.proxy && typeof opt.proxy === 'object' && Object.keys(opt.proxy).length > 0) {
+        Object.keys(opt.proxy).forEach((key) => {
+          // 如果代理配置已存在，不覆盖它
+          if (!proxy[key]) {
+            proxy[key] = opt.proxy![key]
+            // 为新加入的代理应用记录功能
+            applyProxyConfig(proxy, key, prefix, opt)
+          }
+        })
+      }
+
+      return {
+        server: {
+          proxy,
+        },
+      }
     },
 
     configureServer: async (server) => {
@@ -234,6 +234,47 @@ export function viteMockServe(opt: ViteMockOptions = {}): Plugin {
       // const recordMiddleware = await recordRequestMiddleware(opt)
       // middlewares.use(recordMiddleware)
     },
+  }
+}
+
+// 工具函数：为代理配置应用记录功能
+function applyProxyConfig(
+  proxy: Record<string, any>,
+  key: string,
+  prefix: string,
+  opt: ViteMockOptions,
+) {
+  // 字符串形式的代理配置
+  if (typeof proxy[key] === 'string') {
+    proxy[key] = {
+      configure: (proxy: any) =>
+        serverProxyConfig({
+          proxy,
+          prefix,
+          queryExclude: ['_'],
+          record: opt?.record,
+          recordExclude: opt?.recordExclude,
+          logger: opt?.logger,
+        }),
+    }
+  }
+  // 对象形式的代理配置
+  else if (proxy[key] && !(proxy[key] as ProxyOptions).configure) {
+    const target = (proxy[key] as ProxyOptions).target as string
+    if (typeof target === 'string') {
+      proxy[key] = {
+        ...(proxy[key] as ProxyOptions),
+        configure: (proxy: any) =>
+          serverProxyConfig({
+            proxy,
+            prefix,
+            queryExclude: ['_'],
+            record: opt?.record,
+            recordExclude: opt?.recordExclude,
+            logger: opt?.logger,
+          }),
+      }
+    }
   }
 }
 

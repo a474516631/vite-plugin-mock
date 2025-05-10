@@ -383,3 +383,19 @@ export default (config?: MockConfig) => {
 ### Performance Improvements
 
 - Replace typescript plug-in with a faster esbuild plug-in ([58ad7cd](https://github.com/anncwb/vite-plugin-mock/commit/58ad7cd57e3fd0daa92e0fc59c00e09cf6ba45ad))
+
+# 更新日志
+
+## [未发布]
+
+### 增强
+
+- 增加了对 VitePress 的兼容性支持
+  - 添加了 `proxy` 配置项，允许用户在插件选项中直接提供代理配置
+  - 使用标准的 Vite 插件配置机制处理代理配置，更符合社区最佳实践
+  - 解决了在 VitePress 和其他特殊环境中无法获取完整 `server.proxy` 配置的问题
+
+### 修复
+
+- 修复了在某些框架（如 VitePress）中配置不完整导致的功能缺失问题
+- 重构了代理配置处理逻辑，使用标准 Vite 配置返回方式，提高了代码可维护性
