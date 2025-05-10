@@ -32,8 +32,7 @@ export async function createRequestTsServer(
 // create watch mock
 function createWatch(opt: ViteMockOptions, config: ResolvedConfig) {
   const { logger, watchFiles } = opt
-
-  if (!watchFiles) {
+  if (!watchFiles || !opt.requestPath) {
     return
   }
 
