@@ -259,7 +259,7 @@ importers:
         version: 5.0.0
       tsup:
         specifier: 6.7.0
-        version: 6.7.0(postcss@8.4.49)(ts-node@10.9.1)(typescript@5.0.4)
+        version: 6.7.0(postcss@8.4.49)(typescript@5.0.4)
       typescript:
         specifier: ^5.0.4
         version: 5.0.4
@@ -2047,7 +2047,7 @@ packages:
     dev: true
 
   /@polka/url@1.0.0-next.28:
-    resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==, tarball: http://ued.zuoyebang.cc:80/@polka%2furl/-/url-1.0.0-next.28.tgz}
+    resolution: {integrity: sha512-8LduaNlMZGwdZ6qWrKlfa+2M4gahzFkprZiAt2TF8uS0qQgBizKXpXURqvTJ4WtmupWxaLqjRb2UCTe72mu+Aw==, tarball: http://ued.zuoyebang.cc/@polka%2furl/-/url-1.0.0-next.28.tgz}
 
   /@rollup/plugin-alias@5.0.0(rollup@3.29.5):
     resolution: {integrity: sha512-l9hY5chSCjuFRPsnRm16twWBiSApl2uYFLsepQYwtBuAxNMQ/1dJqADld40P0Jkqm65GRTLy/AC6hnpVebtLsA==, tarball: http://ued.zuoyebang.cc/@rollup%2fplugin-alias/-/plugin-alias-5.0.0.tgz}
@@ -5970,6 +5970,7 @@ packages:
 
   /js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
+    requiresBuild: true
     dev: true
 
   /js-tokens@9.0.1:
@@ -6598,7 +6599,7 @@ packages:
     dev: true
 
   /mrmime@2.0.0:
-    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==, tarball: http://ued.zuoyebang.cc:80/mrmime/-/mrmime-2.0.0.tgz}
+    resolution: {integrity: sha512-eu38+hdgojoyq63s+yTpN4XMBdt5l8HhMhc4VKLO9KM5caLIBvUm4thi7fFaxyTmCKeNnXZ5pAlBwCUnhA09uw==, tarball: http://ued.zuoyebang.cc/mrmime/-/mrmime-2.0.0.tgz}
     engines: {node: '>=10'}
 
   /ms@2.0.0:
@@ -7216,7 +7217,7 @@ packages:
       postcss: 8.4.49
     dev: true
 
-  /postcss-load-config@3.1.4(postcss@8.4.49)(ts-node@10.9.1):
+  /postcss-load-config@3.1.4(postcss@8.4.49):
     resolution: {integrity: sha512-6DiM4E7v4coTE4uzA8U//WhtPwyhiim3eyjEMFCnUpzbrkK9wJHgKDT2mR+HbtSrd/NubVaYTOpSpjUl8NQeRg==}
     engines: {node: '>= 10'}
     peerDependencies:
@@ -7230,7 +7231,6 @@ packages:
     dependencies:
       lilconfig: 2.1.0
       postcss: 8.4.49
-      ts-node: 10.9.1(@types/node@16.18.23)(typescript@5.0.4)
       yaml: 1.10.2
     dev: true
 
@@ -8431,7 +8431,7 @@ packages:
     dev: true
 
   /totalist@3.0.1:
-    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==, tarball: http://ued.zuoyebang.cc:80/totalist/-/totalist-3.0.1.tgz}
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==, tarball: http://ued.zuoyebang.cc/totalist/-/totalist-3.0.1.tgz}
     engines: {node: '>=6'}
 
   /tr46@0.0.3:
@@ -8505,7 +8505,7 @@ packages:
     resolution: {integrity: sha512-336iVw3rtn2BUK7ORdIAHTyxHGRIHVReokCR3XjbckJMK7ms8FysBfhLR8IXnAgy7T0PTPNBWKiH514FOW/WSg==}
     dev: true
 
-  /tsup@6.7.0(postcss@8.4.49)(ts-node@10.9.1)(typescript@5.0.4):
+  /tsup@6.7.0(postcss@8.4.49)(typescript@5.0.4):
     resolution: {integrity: sha512-L3o8hGkaHnu5TdJns+mCqFsDBo83bJ44rlK7e6VdanIvpea4ArPcU3swWGsLVbXak1PqQx/V+SSmFPujBK+zEQ==}
     engines: {node: '>=14.18'}
     hasBin: true
@@ -8530,7 +8530,7 @@ packages:
       globby: 11.1.0
       joycon: 3.1.1
       postcss: 8.4.49
-      postcss-load-config: 3.1.4(postcss@8.4.49)(ts-node@10.9.1)
+      postcss-load-config: 3.1.4(postcss@8.4.49)
       resolve-from: 5.0.0
       rollup: 3.20.2
       source-map: 0.8.0-beta.0
